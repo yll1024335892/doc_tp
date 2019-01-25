@@ -1,0 +1,27 @@
+* { padding: 0px; margin: 0px; list-style: none; outline: none; text-decoration: none; }
+
+@-ms-viewport { width: device-width; }
+@-o-viewport { width: device-width; }
+@viewport { width: device-width; }
+body { padding-top: 50px; background: #f1f3f4; }
+.ayi-detail-contain{ margin-top: 50px;}
+.ayi-detail-contain .container .row .thumbnail { border: none; }
+.ayi-detail-contain .container .row .ayi-d-d h1 { font-size: 30px; }
+.ayi-detail-contain .container .row .ayi-d-d .description { font-size: 16px; margin: 10px 0px; }
+.ayi-detail-contain .container .row .ayi-d-d .extra { margin: 10px 0px 0px 0px; }
+.ayi-detail-contain .container .row .ayi-d-d .extra .btn-default { background: #e8e8e8; margin-right: 10px; margin-bottom: 10px; }
+.ayi-detail-contain .container .row .ayi-d-d .mta { margin-bottom: 10px; }
+.ayi-detail-contain .container .row .ayi-d-d .mta .ayi-price { color: #f2711c; font-size: 16px; font-weight: bold; }
+.ayi-detail-contain .container .row .ayi-d-d .ayi-w-action { margin-top: 10px; }
+.ayi-detail-contain .container .row .ayi-d-d .ayi-w-action .action { margin-right: 12px; padding-right: 12px; position: relative; line-height: 20px; color: rgba(0, 0, 0, 0.5); text-decoration: none; cursor: pointer; }
+.ayi-detail-contain .container .row .ayi-d-d .ayi-w-action .dropdown { display: inline-block; }
+.ayi-detail-contain .container .row .ayi-d-d .ayi-w-action .dropdown .dropdown-menu { min-width: 70px; }
+.ayi-detail-contain .container .row .ayi-d-d .ayi-w-action .dropdown .dropdown-menu li { width: 30px; }
+.ayi-detail-contain .container .row .ayi-tab-contain { height: 40px; line-height: 40px; border-bottom: 2px solid rgba(34, 36, 38, 0.15); }
+.ayi-detail-contain .container .row .ayi-tab-contain .item { padding: 10px 18px; border-bottom: 2px solid transparent; color: rgba(0, 0, 0, 0.87); text-decoration: none; cursor: pointer; }
+.ayi-detail-contain .container .row .ayi-tab-contain .active.item { color: #21ba45; border-color: #21ba45; }
+.ayi-detail-contain .container .ayi-hot h2 { color: #333; font-size: 18px; font-weight: 400; }
+.ayi-detail-contain .container .ayi-hot .row .thumbnail div { display: inline-block; text-align: center; margin-bottom: 10px; }
+
+@media (max-width: 340px) { .ayi-detail-contain .container .ayi-hot .row .thumbnail div { display: block; width: 100%; text-align: center; margin-bottom: 10px; }
+  .ayi-detail-contain .container .ayi-hot .row .thumbnail div img { display: inline-block; } }

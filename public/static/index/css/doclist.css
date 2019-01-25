@@ -1,0 +1,66 @@
+@charset "UTF-8";
+/*鼠标放到块上的动画*/
+@-moz-keyframes mask { from { background: #fff; opacity: 0; }
+  to { background: #000; opacity: 0.5; } }
+@-webkit-keyframes mask { from { background: #fff; opacity: 0; }
+  to { background: #000; opacity: 0.5; } }
+@keyframes mask { from { background: #fff; opacity: 0; }
+  to { background: #000; opacity: 0.5; } }
+@-moz-keyframes maskOut { from { background: #000; opacity: 0.5; }
+  to { background: #fff; opacity: 0; } }
+@-webkit-keyframes maskOut { from { background: #000; opacity: 0.5; }
+  to { background: #fff; opacity: 0; } }
+@keyframes maskOut { from { background: #000; opacity: 0.5; }
+  to { background: #fff; opacity: 0; } }
+/*透明度的动画*/
+@-moz-keyframes opacityAni { from { opacity: 0; }
+  to { opacity: 1; } }
+@-webkit-keyframes opacityAni { from { opacity: 0; }
+  to { opacity: 1; } }
+@keyframes opacityAni { from { opacity: 0; }
+  to { opacity: 1; } }
+@-moz-keyframes opacityAniOut { from { opacity: 1; }
+  to { opacity: 0; } }
+@-webkit-keyframes opacityAniOut { from { opacity: 1; }
+  to { opacity: 0; } }
+@keyframes opacityAniOut { from { opacity: 1; }
+  to { opacity: 0; } }
+@-moz-keyframes imgBlur { from { filter: blur(0px); }
+  to { filter: blur(5px); } }
+@-webkit-keyframes imgBlur { from { -webkit-filter: blur(0px); filter: blur(0px); }
+  to { -webkit-filter: blur(5px); filter: blur(5px); } }
+@keyframes imgBlur { from { -webkit-filter: blur(0px); filter: blur(0px); }
+  to { -webkit-filter: blur(5px); filter: blur(5px); } }
+@-moz-keyframes imgBlurOut { from { filter: blur(5px); }
+  to { filter: blur(0px); } }
+@-webkit-keyframes imgBlurOut { from { -webkit-filter: blur(5px); filter: blur(5px); }
+  to { -webkit-filter: blur(0px); filter: blur(0px); } }
+@keyframes imgBlurOut { from { -webkit-filter: blur(5px); filter: blur(5px); }
+  to { -webkit-filter: blur(0px); filter: blur(0px); } }
+.ayi-floor { width: 100%; background: #f1f3f4; clear: both; margin-top: 50px; }
+.ayi-floor .ayi-floor-contain .row { position: relative; clear: both; }
+.ayi-floor .ayi-floor-contain .ayi-c-left h1 { padding-left: 20px; font-size: 18px; color: #666; font-weight: normal; }
+.ayi-floor .ayi-floor-contain .ayi-c-left .ayi-c-left-c { width: 160px; margin-left: 20px; margin-bottom: 20px; float: left; position: relative; cursor: pointer; -moz-border-radius: 0.4rem; -webkit-border-radius: 0.4rem; border-radius: 0.4rem; }
+.ayi-floor .ayi-floor-contain .ayi-c-left .ayi-c-left-c img { width: 100%; -webkit-filter: blur(0px); filter: blur(0px); -moz-border-radius: inherit; -webkit-border-radius: inherit; border-radius: inherit; }
+.ayi-floor .ayi-floor-contain .ayi-c-left .ayi-c-left-c .ayi-c-l-msg { position: absolute; top: 0px; width: 100%; height: 100%; -moz-border-radius: inherit; -webkit-border-radius: inherit; border-radius: inherit; }
+.ayi-floor .ayi-floor-contain .ayi-c-left .ayi-c-left-c .ayi-c-l-msg .ayi-c-l-mask { width: 100%; height: 100%; background: #fff; -moz-border-radius: inherit; -webkit-border-radius: inherit; border-radius: inherit; filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0); opacity: 0; position: absolute; z-index: 100; }
+.ayi-floor .ayi-floor-contain .ayi-c-left .ayi-c-left-c .ayi-c-l-msg .ayi-c-m { position: absolute; z-index: 200; }
+.ayi-floor .ayi-floor-contain .ayi-c-left .ayi-c-left-c .ayi-c-l-msg .ayi-c-m h4 { margin: 60px 5px 5px 5px; text-align: center; color: #fff; line-height: 26px; filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0); opacity: 0; }
+.ayi-floor .ayi-floor-contain .ayi-c-left .ayi-c-left-c .ayi-c-l-msg .ayi-c-m .ayi-cl-price { text-align: center; color: #fbbd08; font-weight: bold; filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0); opacity: 0; }
+.ayi-floor .ayi-floor-contain .ayi-c-left .ayi-c-left-c-hover img { -webkit-filter: blur(5px); filter: blur(5px); -moz-animation: imgBlur 0.5s; -webkit-animation: imgBlur 0.5s; animation: imgBlur 0.5s; }
+.ayi-floor .ayi-floor-contain .ayi-c-left .ayi-c-left-c-hover .ayi-c-l-msg .ayi-c-l-mask { background: #000; filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50); opacity: 0.5; -moz-animation: mask 0.5s; -webkit-animation: mask 0.5s; animation: mask 0.5s; }
+.ayi-floor .ayi-floor-contain .ayi-c-left .ayi-c-left-c-hover .ayi-c-l-msg .ayi-c-m h4 { filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false); opacity: 1; -moz-animation: opacityAni 0.5s; -webkit-animation: opacityAni 0.5s; animation: opacityAni 0.5s; }
+.ayi-floor .ayi-floor-contain .ayi-c-left .ayi-c-left-c-hover .ayi-c-l-msg .ayi-c-m .ayi-cl-price { filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false); opacity: 1; -moz-animation: opacityAni 0.5s; -webkit-animation: opacityAni 0.5s; animation: opacityAni 0.5s; }
+.ayi-floor .ayi-floor-contain .ayi-c-left .ayi-c-left-c-hoverOut img { -webkit-filter: blur(0px); filter: blur(0px); -moz-animation: imgBlurOut 0.5s; -webkit-animation: imgBlurOut 0.5s; animation: imgBlurOut 0.5s; }
+.ayi-floor .ayi-floor-contain .ayi-c-left .ayi-c-left-c-hoverOut .ayi-c-l-msg .ayi-c-l-mask { -moz-animation: maskOut 0.5s; -webkit-animation: maskOut 0.5s; animation: maskOut 0.5s; }
+.ayi-floor .ayi-floor-contain .ayi-c-left .ayi-c-left-c-hoverOut .ayi-c-l-msg .ayi-c-m h4 { -moz-animation: opacityAniOut 0.5s; -webkit-animation: opacityAniOut 0.5s; animation: opacityAniOut 0.5s; }
+.ayi-floor .ayi-floor-contain .ayi-c-left .ayi-c-left-c-hoverOut .ayi-c-l-msg .ayi-c-m .ayi-cl-price { -moz-animation: opacityAniOut 0.5s; -webkit-animation: opacityAniOut 0.5s; animation: opacityAniOut 0.5s; }
+.ayi-floor .ayi-floor-contain .ayi-c-right { margin-top: 10px; position: absolute; right: 0px; }
+.ayi-floor .ayi-floor-contain .ayi-c-right .ayi-ad { width: 100%; margin-bottom: 2px; }
+.ayi-floor .ayi-floor-contain .ayi-c-right .ayi-ad img { width: 100%; max-width: 100%; }
+.ayi-floor .ayi-floor-contain .ayi-page-c { clear: both; text-align: center; }
+
+@media (max-width: 768px) { .ayi-c-right { display: none; }
+  .ayi-floor .ayi-floor-contain .ayi-c-left .ayi-c-left-c { width: 42%; } }
+@media (min-width: 768px) and (max-width: 992px) { .ayi-floor .ayi-floor-contain .ayi-c-left .ayi-c-left-c { width: 135px; } }
+@media (min-width: 992px) and (max-width: 1200px) { .ayi-floor .ayi-floor-contain .ayi-c-left .ayi-c-left-c { width: 180px; } }
