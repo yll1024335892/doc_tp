@@ -14,10 +14,10 @@
  */
 return array(
     //产品配置
-    'install_product_name'   => 'snake_', //产品名称
-    'install_website_domain' => 'http://www.tpkj.yll', //官方网址
-    'install_company_name'   => 'snake通用后台', //公司名称
-    'original_table_prefix'  => 'snake_', //默认表前缀
+    'install_product_name'   => 'ayi_', //产品名称
+    'install_website_domain' => 'http://www.52website.cn', //官方网址
+    'install_company_name'   => '阿翼通用后台', //公司名称
+    'original_table_prefix'  => 'ayi_', //默认表前缀
 
     // 安装配置
     'install_table_total' => 28, // 安装时，需执行的sql语句数量

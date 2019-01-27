@@ -9,7 +9,7 @@
 // | Author: liu21st <liu21st@gmail.com>
 // +----------------------------------------------------------------------
 
-// [ 应用入口文件 ]
+// 没有的化第一次就安装处理
 if(!file_exists(__DIR__ . '/../data/install.lock')){
     define('BIND_MODULE', 'install');
 }

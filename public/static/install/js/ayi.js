@@ -1,8 +1,12 @@
-
+/*
+ *  Document   : dolphin.js
+ *  Author     : 
+ */
 
 var Dolphin = function () {
     /**
      * 处理ajax方式的post提交
+     * @author 
      */
     var ajaxPost = function () {
         jQuery(document).delegate('.ajax-post', 'click', function () {
@@ -281,6 +285,7 @@ var Dolphin = function () {
 
     /**
      * 处理ajax方式的get提交
+     * @author 
      */
     var ajaxGet = function () {
         jQuery(document).delegate('.ajax-get', 'click', function () {
@@ -401,6 +406,7 @@ var Dolphin = function () {
 
     /**
      * 处理普通方式的get提交
+     * @author 
      */
     var jsGet = function () {
         jQuery(document).delegate('.js-get', 'click', function () {
@@ -456,6 +462,7 @@ var Dolphin = function () {
 
     /**
      * 顶部菜单
+     * @author 
      */
     var topMenu = function () {
         $('.top-menu').click(function () {
@@ -494,6 +501,7 @@ var Dolphin = function () {
      * @param $icon 图标，例如：'fa fa-user' 或 'glyphicon glyphicon-warning-sign'
      * @param $from 'top' 或 'bottom'
      * @param $align 'left', 'right', 'center'
+     * @author 
      */
     var tips = function ($msg, $type, $icon, $from, $align) {
         $type  = $type || 'info';
@@ -530,6 +538,7 @@ var Dolphin = function () {
     /**
      * 页面加载提示
      * @param $mode 'show', 'hide'
+     * @author 
      */
     var pageLoader = function ($mode) {
         var $loadingEl = jQuery('#loading');
@@ -552,6 +561,7 @@ var Dolphin = function () {
 
     /**
      * 启用图标搜索
+     * @author 
      */
     var iconSearchLoader = function () {
         // Set variables

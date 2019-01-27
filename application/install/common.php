@@ -1,4 +1,14 @@
 <?php
+// +----------------------------------------------------------------------
+// | 海豚PHP框架 [ DolphinPHP ]
+// +----------------------------------------------------------------------
+// | 版权所有 2016~2017 河源市卓锐科技有限公司 [ http://www.zrthink.com ]
+// +----------------------------------------------------------------------
+// | 官方网站: http://dolphinphp.com
+// +----------------------------------------------------------------------
+// | 开源协议 ( http://www.apache.org/licenses/LICENSE-2.0 )
+// +----------------------------------------------------------------------
+
 // 此函数文件来自OneThink
 
 /**
@@ -155,7 +165,7 @@ function write_config($config){
  */
 function create_tables($db, $prefix = ''){
     // 读取SQL文件
-    $sql = file_get_contents(APP_PATH . 'install/data/snake.sql');
+    $sql = file_get_contents(APP_PATH . 'install/data/ayi.sql');
 
     $sql = str_replace("\r", "\n", $sql);
     $sql = explode(";\n", $sql);
@@ -243,7 +253,7 @@ function show_msg($msg, $class = ''){
  * 显示进度
  * @param $msg
  * @param string $class
- * @author 蔡伟明 <314013107@qq.com>
+ * @author
  */
 function show_progress($msg, $class = ''){
     echo "<script type=\"text/javascript\">show_progress(\"{$msg}\", \"{$class}\")</script>";

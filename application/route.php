@@ -28,14 +28,6 @@ Route::post([
     'docs/upload'=>'admin/Document/upload'
 ]);
 Route::rule('docs/history/:id','admin/Document/history','GET|POST');
-
-
-
-
-//文件上传
-Route::post('/upload',[
-    'middleware' => 'authorize' , 'as' => 'document.upload', 'uses' => 'DocumentController@upload'
-]);
 return [
     '__pattern__' => [
         'name' => '\w+',
@@ -43,6 +35,6 @@ return [
     '[hello]'     => [
         ':id'   => ['index/hello', ['method' => 'get'], ['id' => '\d+']],
         ':name' => ['index/hello', ['method' => 'post']],
-    ]
+    ],
 
 ];

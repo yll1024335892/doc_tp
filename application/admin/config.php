@@ -18,8 +18,6 @@ return [
         '__IMG__' => '/static/admin/images',
         '__DOC__'=>'/static/document'
     ),
-    //是否强制使用路由
-    'url_route_must'=>false,
 
     // 管理员状态
     'user_status' => [

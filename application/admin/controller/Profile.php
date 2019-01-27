@@ -1,11 +1,21 @@
 <?php
-
+// +----------------------------------------------------------------------
+// | 阿翼
+// +----------------------------------------------------------------------
+// | Copyright (c) 2016~2022 深圳市阿翼互联网有限公司 All rights reserved.
+// +----------------------------------------------------------------------
+// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
+// +----------------------------------------------------------------------
+// | Author: RunsTp <RunsTP@163.com>
+// +----------------------------------------------------------------------
 namespace app\admin\controller;
 
 use think\Response;
 use think\Image;
 use app\admin\model\UserModel;
-
+/**
+ *
+ */
 class Profile extends Base
 {
 
@@ -127,7 +137,7 @@ class Profile extends Base
         $info = $file->move($this->head_save_path, $save_name);
 
         if (false === $info) {
-            return json(['status' => 'error', 'message' => "上传失败！"]);
+            return json(['status' => 'error', 'message' => $file->error]);
         }else {
             //返回图像信息
             $image = Image::open($this->head_save_path. '/'. $save_name);
