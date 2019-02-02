@@ -124,6 +124,7 @@ class Role extends Base
             $flag = $user->editAccess($doparam);
 
             $this->removRoleCache();
+            var_export($flag['data']);
             return json(msg($flag['code'], $flag['data'], $flag['msg']));
         }
     }

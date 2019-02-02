@@ -3,7 +3,7 @@
  * 生成操作按钮
  * @param array $operate 操作按钮数组
  */
-function showOperate($operate = [])
+function showOperate($operate = [],$isTarget=false)
 {
     if(empty($operate)){
         return '';
@@ -11,9 +11,14 @@ function showOperate($operate = [])
 
     $option = '';
     foreach($operate as $key=>$vo){
-        if(authCheck($vo['auth'])){
-            $option .= ' <a href="' . $vo['href'] . '"><button type="button" class="btn btn-' . $vo['btnStyle'] . ' btn-sm">'.
-                '<i class="' . $vo['icon'] . '"></i> ' . $key . '</button></a>';
+        if(authCheck($vo['auth']) || $vo['auth']=="no"){
+            if($isTarget){
+                $option .= ' <a href="' . $vo['href'] . '"  target="_blank"><button type="button" class="btn btn-' . $vo['btnStyle'] . ' btn-sm">'.
+                    '<i class="' . $vo['icon'] . '"></i> ' . $key . '</button></a>';
+            }else{
+                $option .= ' <a href="' . $vo['href'] . '"><button type="button" class="btn btn-' . $vo['btnStyle'] . ' btn-sm">'.
+                    '<i class="' . $vo['icon'] . '"></i> ' . $key . '</button></a>';
+            }
         }
     }
 

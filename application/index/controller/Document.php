@@ -21,17 +21,16 @@ class Document  extends Controller
     public function show($id){
         $doc_id = intval($id);
         if($doc_id <= 0){
-          //  abort(404);
+            $this->error("非法的数据格式！","/");
         }
         $doc = DocumentModel::getDocumentFromCache($doc_id);
 
         if(empty($doc) ){
-           // abort(404);
+            $this->error("文档不存在！","/");
         }
         $project = ProjectModel::getProjectFromCache($doc->project_id);
-
         if(empty($project)){
-          //  abort(404);
+            $this->error("文档不存在！","/");
         }
     //权限处需要单独的处理 todo
 //        $permissions = Project::hasProjectShow($project->project_id,$this->member_id);

@@ -14,6 +14,7 @@ namespace app\model;
 use think\Cache;
 use think\Model;
 
+
 class DocumentModel extends Model
 {
     protected $name = 'document';
@@ -87,5 +88,20 @@ class DocumentModel extends Model
             Cache::set($key,$html,3600);
         }
         return $html;
+    }
+
+    public function getTree($project_id){
+        $result = $this->where("project_id","eq",$project_id)->field('doc_id,doc_name,parent_id,is_price')->select();
+        $str = '';
+        foreach($result as $key=>$vo){
+            $str .= '{ "id": "' . $vo['doc_id'] . '", "pId":"' . $vo['parent_id'] . '", "name":"' . $vo['doc_name'].'"';
+            if($vo['is_price']==1){
+                $str .= ' ,"checked":1';
+            }
+            $str .= '},';
+
+        }
+
+        return '[' . rtrim($str, ',') . ']';
     }
 }

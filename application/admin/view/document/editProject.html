@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>添加文档</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="__CSS__/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="__CSS__/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="__CSS__/style.min.css?v=4.1.0" rel="stylesheet">
+    <link href="__JS__/layui/css/layui.css"rel="stylesheet">
+
+    <link href="/static/cropper/cropper.min.css" rel="stylesheet">
+</head>
+<style type="text/css">
+    .avatar-view {
+        display: block;
+        width: 220px;
+        height: 220px;
+        border: 3px solid #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 5px rgba(0,0,0,.15);
+        cursor: pointer;
+        overflow: hidden;
+    }
+
+    .avatar-view img {
+        width: 100%;
+    }
+
+    .avatar-body {
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+
+    .avatar-upload {
+        overflow: hidden;
+    }
+
+    .avatar-upload label {
+        display: block;
+        float: left;
+        clear: left;
+        width: 100px;
+    }
+
+    .avatar-upload input {
+        display: block;
+        margin-left: 110px;
+    }
+
+    .avater-alert {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .avatar-wrapper {
+        height: 364px;
+        width: 100%;
+        margin-top: 15px;
+        box-shadow: inset 0 0 5px rgba(0,0,0,.25);
+        background-color: #fcfcfc;
+        overflow: hidden;
+    }
+
+    .avatar-wrapper img {
+        display: block;
+        height: auto;
+        max-width: 100%;
+    }
+
+    .avatar-preview {
+        float: left;
+        margin-top: 15px;
+        margin-right: 15px;
+        border: 1px solid #eee;
+        border-radius: 4px;
+        background-color: #fff;
+        overflow: hidden;
+    }
+
+    .avatar-preview:hover {
+        border-color: #ccf;
+        box-shadow: 0 0 5px rgba(0,0,0,.15);
+    }
+
+    .avatar-preview img {
+        width: 100%;
+    }
+
+    .preview-lg {
+        height: 184px;
+        width: 184px;
+        margin-top: 15px;
+    }
+
+    .preview-md {
+        height: 100px;
+        width: 100px;
+    }
+
+    .preview-sm {
+        height: 50px;
+        width: 50px;
+    }
+
+    @media (min-width: 992px) {
+        .avatar-preview {
+            float: none;
+        }
+    }
+
+    .avatar-btns {
+        margin-top: 30px;
+        margin-bottom: 15px;
+    }
+
+    .avatar-btns .btn-group {
+        margin-right: 5px;
+    }
+
+    .loading {
+        display: none;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        opacity: .75;
+        filter: alpha(opacity=75);
+        z-index: 20140628;
+    }
+</style>
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-10">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>添加文档</h5>
+                </div>
+                <div class="ibox-content">
+                    <form class="form-horizontal m-t" id="commentForm" method="post" action="{:url('Document/editProject')}">
+                        <input type="hidden" name="project_id" value="{$project_id}">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">文档标题：</label>
+                            <div class="input-group col-sm-7">
+                                <input id="title" type="text" value="{$project_name}" class="form-control" name="project_name" required="" aria-required="true">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">文档描述：</label>
+                            <div class="input-group col-sm-7">
+                                <textarea id="description"  class="form-control" name="description" required="" aria-required="true">{$description}</textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">是否显示：</label>
+                            <div class="input-group col-sm-7">
+                                隐藏<input type="radio" name="project_open_state"  {if condition="$project_open_state eq 0"} checked{/if}  value="0" />
+                                显示<input type="radio" name="project_open_state" {if condition="$project_open_state eq 1"} checked{/if} value="1"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">缩略图：</label>
+                            <input name="thumbnail" id="thumbnail" type="hidden" value="{$thumbnail}"/>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#avatar-modal" style="margin: 10px;">
+                                修改头像
+                            </button>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-3 col-sm-offset-3">
+                                <img src="{$thumbnail}" class="img-responsive" id="showImg"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-3 col-sm-offset-3">
+                                <button class="btn btn-primary" type="submit">确认提交</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="avatar-modal" aria-hidden="true" aria-labelledby="avatar-modal-label" role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form class="avatar-form">
+                <div class="modal-header">
+                    <button class="close" data-dismiss="modal" type="button">×</button>
+                    <h4 class="modal-title" id="avatar-modal-label">上传图片</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="avatar-body">
+                        <div class="avatar-upload">
+                            <input class="avatar-src" name="avatar_src" type="hidden">
+                            <input class="avatar-data" name="avatar_data" type="hidden">
+                            <label for="avatarInput" style="line-height: 35px;">图片上传</label>
+                            <button class="btn btn-danger" type="button" style="height: 35px;" onclick="$('input[id=avatarInput]').click();">请选择图片</button>
+                            <span id="avatar-name"></span>
+                            <input class="avatar-input hide" id="avatarInput" name="avatar_file" type="file"></div>
+                        <div class="row">
+                            <div class="col-md-9">
+                                <div class="avatar-wrapper"></div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="avatar-preview preview-lg" id="imageHead"></div>
+
+                            </div>
+                        </div>
+                        <div class="row avatar-btns">
+                            <div class="col-md-4">
+                                <div class="btn-group">
+                                    <button class="btn btn-danger fa fa-undo" data-method="rotate" data-option="-90" type="button" title="Rotate -90 degrees"> 向左旋转</button>
+                                </div>
+                                <div class="btn-group">
+                                    <button class="btn  btn-danger fa fa-repeat" data-method="rotate" data-option="90" type="button" title="Rotate 90 degrees"> 向右旋转</button>
+                                </div>
+                            </div>
+                            <div class="col-md-5" style="text-align: right;">
+                                <button class="btn btn-danger fa fa-arrows" data-method="setDragMode" data-option="move" type="button" title="移动">
+<span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="$().cropper('setDragMode', 'move')">
+</span>
+                                </button>
+                                <button type="button" class="btn btn-danger fa fa-search-plus" data-method="zoom" data-option="0.1" title="放大图片">
+<span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="$().cropper('zoom', 0.1)">
+
+</span>
+                                </button>
+                                <button type="button" class="btn btn-danger fa fa-search-minus" data-method="zoom" data-option="-0.1" title="缩小图片">
+<span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="$().cropper('zoom', -0.1)">
+
+</span>
+                                </button>
+                                <button type="button" class="btn btn-danger fa fa-refresh" data-method="reset" title="重置图片">
+<span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="$().cropper('reset')" aria-describedby="tooltip866214">
+</span></button>
+                            </div>
+                            <div class="col-md-3">
+                                <button class="btn btn-danger btn-block avatar-save fa fa-save" id="getImg"   type="button"  data-dismiss="modal"> 保存修改</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="loading" aria-label="Loading" role="img" tabindex="-1"></div>
+
+
+<script src="__JS__/jquery.min.js?v=2.1.4"></script>
+<script src="__JS__/bootstrap.min.js?v=3.3.6"></script>
+<script src="__JS__/plugins/layer/layer.min.js"></script>
+<script src="__JS__/jquery.form.js"></script>
+<script src="/static/cropper/cropper.min.js"></script>
+<script src="/static/cropper/upload.js"></script>
+<script type="text/javascript">
+
+    var index = '';
+    function showStart(){
+        index = layer.load(0, {shade: false});
+        return true;
+    }
+
+    function showSuccess(res){
+        layer.ready(function(){
+            layer.close(index);
+            if(1 == res.code){
+                layer.alert(res.msg, {title: '友情提示', icon: 1, closeBtn: 0}, function(){
+                    window.location.href = res.data;
+                });
+            }else if(111 == res.code){
+                window.location.reload();
+            }else{
+                layer.msg(res.msg, {anim: 6});
+            }
+        });
+    }
+
+
+    $(function(){
+        $("#getImg").click(function () {
+           $img=$(".cropper-hidden").cropper("getCroppedCanvas",{"fillColor":'#fff'});
+           $hh= $img.toDataURL("image/jpeg");
+            $.post("{:url('Document/uploadImg')}",{"imgData":$hh},function (data) {
+                $("#thumbnail").val(data);
+                $("#showImg").attr("src",data);
+            });
+        });
+        var options = {
+            beforeSubmit:showStart,
+            success:showSuccess
+        };
+        $('#commentForm').submit(function(){
+            $(this).ajaxSubmit(options);
+            return false;
+        });
+    });
+</script>
+</body>
+</html>

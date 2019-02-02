@@ -15,6 +15,7 @@ return [
         '__CSS__'    => '/static/index/css',
         '__JS__'     => '/static/index/js',
         '__IMG__' => '/static/index/images',
+        '__DOC__'=>'/static/document'
     ),
     //是否强制使用路由
     'url_route_must'=>false
