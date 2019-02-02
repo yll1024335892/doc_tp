@@ -12,6 +12,7 @@ namespace app\admin\controller;
 
 
 use app\model\DocumentModel;
+use app\model\ProjectCategoryModel;
 use app\model\ProjectModel;
 use think\Controller;
 use think\Request;
@@ -73,16 +74,18 @@ class Document extends Controller
             foreach ($selectResult as $key => $vo) {
                 $imgSrc = $vo['thumbnail'] ? $vo['thumbnail'] : "/static/admin/images/blank_img.jpg";
                 $selectResult[$key]['thumbnail'] = '<img src="' . $imgSrc . '" width="40px" height="40px" onclick="javascript:scaleImg(this)">';
+                $selectResult[$key]['cate']=$selectResult[$key]['type_id'];
                 if (isset($vo['doc_tree']) && $vo['doc_tree'] != null) {
-                    $selectResult[$key]['operate'] = showOperate($this->makeButton($vo['project_id'], json_decode($vo['doc_tree'], true)[0]['doc_id']),true);
+                    $selectResult[$key]['operate'] = showOperate($this->makeButton($vo['project_id'], json_decode($vo['doc_tree'], true)[0]['doc_id']), true);
                 } else {
-                    $selectResult[$key]['operate'] = showOperate($this->makeButton($vo['project_id'], ""),true);
+                    $selectResult[$key]['operate'] = showOperate($this->makeButton($vo['project_id'], ""), true);
                 }
             }
             $return['total'] = $Model->getAllProjects($where);  // 总数据
             $return['rows'] = $selectResult;
             return json($return);
         }
+
         return $this->fetch();
     }
 
@@ -93,14 +96,15 @@ class Document extends Controller
     {
         if (request()->isPost()) {
             $param = input('post.');
-
             unset($param['file']);
             //  $param['add_time'] = date('Y-m-d H:i:s');
             $model = new ProjectModel();
             $flag = $model->addProject($param);
             return json(msg($flag['code'], $flag['data'], $flag['msg']));
         }
-        return $this->fetch();
+        $projectCateModel=new ProjectCategoryModel();
+        $treeData = getProjectTree($projectCateModel->select());
+        return $this->fetch("",['treeData'=>$treeData]);
     }
 
     private function detailProjectTree($data, $project_id)
@@ -128,7 +132,9 @@ class Document extends Controller
             return json(msg($flag['code'], $flag['data'], $flag['msg']));
         } else {
             $res = $model->where("project_id", 'eq', (int)input("id"))->find();
-            return $this->fetch('', $res->toArray());
+            $projectCateModel=new ProjectCategoryModel();
+            $treeData = getProjectTree($projectCateModel->select());
+            return $this->fetch('', ['treeData'=>$treeData,"res"=>$res]);
         }
 
     }
@@ -465,15 +471,15 @@ class Document extends Controller
         }
         if ('give' == $param['type']) {
             $checkID = $param['checkId'];
-            $model->save(["is_price"=>"0"],["project_id"=>$param['id']]);
+            $model->save(["is_price" => "0"], ["project_id" => $param['id']]);
             if ($checkID != "") {
                 $checkIDArr = explode(",", $checkID);
-                $list=array();
-                foreach ($checkIDArr as $val){
-                    $list[]=["project_id"=>$param['id'],"doc_id"=>$val,"is_price"=>1];
+                $list = array();
+                foreach ($checkIDArr as $val) {
+                    $list[] = ["project_id" => $param['id'], "doc_id" => $val, "is_price" => 1];
                 }
-                if (count($list)>0){
-                    $model->isUpdate()->saveAll($list,true);
+                if (count($list) > 0) {
+                    $model->isUpdate()->saveAll($list, true);
                 }
             }
             return json(msg(1, "", '文档收费状态更新'));

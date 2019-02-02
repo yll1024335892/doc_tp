@@ -77,3 +77,22 @@ function getDocumentTree($data,$project_id,$parent_id=0,$level=0){
     }
     return $arr;
 }
+
+/**获取project的类别的数据
+ * @param $data
+ * @param $project_id
+ * @param int $parent_id
+ * @param int $level
+ * @return array
+ */
+function getProjectTree($data,$parent_id=0,$level=0){
+    static $arr=array();
+    foreach($data as $key=>$value){
+        if($value['parent_id'] == $parent_id){
+            $value['level']=$level;     //用来作为在模版进行层级的区分
+            $arr[] = $value;            //把内容存进去
+            getProjectTree($data,$value['id'],$level+1);    //回调进行无线递归
+        }
+    }
+    return $arr;
+}
