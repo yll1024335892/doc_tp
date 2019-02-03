@@ -15,225 +15,33 @@
             <div class="col-sm-8 col-md-8 col-lg-8 ayi-c-left">
                 <h1>
                     {volist name="cate" id="vo"}
-                    <span class="btn btn-default" title="{$vo.cate_name}">{$vo.cate_name}</span>
+                    {if condition="$nowTypeId eq $vo.id"}
+                    <a href="/docs/list/{$vo.id}"> <span class="btn btn-success" title="{$vo.cate_name}">{$vo.cate_name}</span></a>
+                    {else /}
+                    <a href="/docs/list/{$vo.id}"> <span class="btn btn-default" title="{$vo.cate_name}">{$vo.cate_name}</span></a>
+                    {/if}
                     {/volist}
                 </h1>
+                {volist name ="project" id="vo"}
                 <div class="ayi-c-left-c">
+                    <a href="/docs/detail/{$vo.project_id}" target="_blank" title="{$vo.project_name}">
+                    {if condition="$vo.thumbnail"}
+                    <img src="{$vo.thumbnail}"/>
+                    {else /}
                     <img src="__IMG__/blank.jpg"/>
+                    {/if}
                     <div class="ayi-c-l-msg">
                         <div class="ayi-c-l-mask"></div>
                         <div class="ayi-c-m">
-                            <h4>createjs-从入门到精通</h4>
+                            <h4>{$vo.project_name}</h4>
                             <p class="ayi-cl-price">
-                                ￥8.88
+                                ￥{$vo.price}
                             </p>
                         </div>
                     </div>
+                    </a>
                 </div>
-                <div class="ayi-c-left-c">
-                    <img src="__IMG__/blank.jpg"/>
-                    <div class="ayi-c-l-msg">
-                        <div class="ayi-c-l-mask"></div>
-                        <div class="ayi-c-m">
-                            <h4>createjs-从入门到精通</h4>
-                            <p class="ayi-cl-price">
-                                ￥8.88
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="ayi-c-left-c">
-                    <img src="__IMG__/blank.jpg"/>
-                    <div class="ayi-c-l-msg">
-                        <div class="ayi-c-l-mask"></div>
-                        <div class="ayi-c-m">
-                            <h4>createjs-从入门到精通</h4>
-                            <p class="ayi-cl-price">
-                                ￥8.88
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="ayi-c-left-c">
-                    <img src="__IMG__/blank.jpg"/>
-                    <div class="ayi-c-l-msg">
-                        <div class="ayi-c-l-mask"></div>
-                        <div class="ayi-c-m">
-                            <h4>createjs-从入门到精通</h4>
-                            <p class="ayi-cl-price">
-                                ￥8.88
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="ayi-c-left-c">
-                    <img src="__IMG__/blank.jpg"/>
-                    <div class="ayi-c-l-msg">
-                        <div class="ayi-c-l-mask"></div>
-                        <div class="ayi-c-m">
-                            <h4>createjs-从入门到精通</h4>
-                            <p class="ayi-cl-price">
-                                ￥8.88
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="ayi-c-left-c">
-                    <img src="__IMG__/blank.jpg"/>
-                    <div class="ayi-c-l-msg">
-                        <div class="ayi-c-l-mask"></div>
-                        <div class="ayi-c-m">
-                            <h4>createjs-从入门到精通</h4>
-                            <p class="ayi-cl-price">
-                                ￥8.88
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="ayi-c-left-c">
-                    <img src="__IMG__/blank.jpg"/>
-                    <div class="ayi-c-l-msg">
-                        <div class="ayi-c-l-mask"></div>
-                        <div class="ayi-c-m">
-                            <h4>createjs-从入门到精通</h4>
-                            <p class="ayi-cl-price">
-                                ￥8.88
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="ayi-c-left-c">
-                    <img src="__IMG__/blank.jpg"/>
-                    <div class="ayi-c-l-msg">
-                        <div class="ayi-c-l-mask"></div>
-                        <div class="ayi-c-m">
-                            <h4>createjs-从入门到精通</h4>
-                            <p class="ayi-cl-price">
-                                ￥8.88
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="ayi-c-left-c">
-                    <img src="__IMG__/blank.jpg"/>
-                    <div class="ayi-c-l-msg">
-                        <div class="ayi-c-l-mask"></div>
-                        <div class="ayi-c-m">
-                            <h4>createjs-从入门到精通</h4>
-                            <p class="ayi-cl-price">
-                                ￥8.88
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="ayi-c-left-c">
-                    <img src="__IMG__/blank.jpg"/>
-                    <div class="ayi-c-l-msg">
-                        <div class="ayi-c-l-mask"></div>
-                        <div class="ayi-c-m">
-                            <h4>createjs-从入门到精通</h4>
-                            <p class="ayi-cl-price">
-                                ￥8.88
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="ayi-c-left-c">
-                    <img src="__IMG__/blank.jpg"/>
-                    <div class="ayi-c-l-msg">
-                        <div class="ayi-c-l-mask"></div>
-                        <div class="ayi-c-m">
-                            <h4>createjs-从入门到精通</h4>
-                            <p class="ayi-cl-price">
-                                ￥8.88
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="ayi-c-left-c">
-                    <img src="__IMG__/blank.jpg"/>
-                    <div class="ayi-c-l-msg">
-                        <div class="ayi-c-l-mask"></div>
-                        <div class="ayi-c-m">
-                            <h4>createjs-从入门到精通</h4>
-                            <p class="ayi-cl-price">
-                                ￥8.88
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="ayi-c-left-c">
-                    <img src="__IMG__/blank.jpg"/>
-                    <div class="ayi-c-l-msg">
-                        <div class="ayi-c-l-mask"></div>
-                        <div class="ayi-c-m">
-                            <h4>createjs-从入门到精通</h4>
-                            <p class="ayi-cl-price">
-                                ￥8.88
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="ayi-c-left-c">
-                    <img src="__IMG__/blank.jpg"/>
-                    <div class="ayi-c-l-msg">
-                        <div class="ayi-c-l-mask"></div>
-                        <div class="ayi-c-m">
-                            <h4>createjs-从入门到精通</h4>
-                            <p class="ayi-cl-price">
-                                ￥8.88
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="ayi-c-left-c">
-                    <img src="__IMG__/blank.jpg"/>
-                    <div class="ayi-c-l-msg">
-                        <div class="ayi-c-l-mask"></div>
-                        <div class="ayi-c-m">
-                            <h4>createjs-从入门到精通</h4>
-                            <p class="ayi-cl-price">
-                                ￥8.88
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="ayi-c-left-c">
-                    <img src="__IMG__/blank.jpg"/>
-                    <div class="ayi-c-l-msg">
-                        <div class="ayi-c-l-mask"></div>
-                        <div class="ayi-c-m">
-                            <h4>createjs-从入门到精通</h4>
-                            <p class="ayi-cl-price">
-                                ￥8.88
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="ayi-c-left-c">
-                    <img src="__IMG__/blank.jpg"/>
-                    <div class="ayi-c-l-msg">
-                        <div class="ayi-c-l-mask"></div>
-                        <div class="ayi-c-m">
-                            <h4>createjs-从入门到精通</h4>
-                            <p class="ayi-cl-price">
-                                ￥8.88
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="ayi-c-left-c">
-                    <img src="__IMG__/blank.jpg"/>
-                    <div class="ayi-c-l-msg">
-                        <div class="ayi-c-l-mask"></div>
-                        <div class="ayi-c-m">
-                            <h4>createjs-从入门到精通</h4>
-                            <p class="ayi-cl-price">
-                                ￥8.88
-                            </p>
-                        </div>
-                    </div>
-                </div>
+                {/volist}
             </div>
             <div class="col-sm-4 col-md-4 col-lg-4 ayi-c-right">
                 <div class="ayi-ad"><a href="javascript:" target="_blank" title="我是广告"><img src="__IMG__/bg.jpg" /></a></div>

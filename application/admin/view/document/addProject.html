@@ -152,7 +152,11 @@
                             <div class="input-group col-sm-7">
                                 <select name="type_id" class="form-control">
                                     {volist name="treeData" id="vo"}
+                                    {if condition="$vo.parent_id neq 0"}
                                     <option value="{$vo.id}">{$vo.cate_name}</option>
+                                    {else /}
+                                    <option value="{$vo.id}" style="color: #E8E9EC;" disabled>{$vo.cate_name}</option>
+                                    {/if}
                                     {/volist}
                                 </select>
                             </div>

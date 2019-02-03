@@ -158,7 +158,11 @@
                                     {if condition="$res.type_id eq $vo.id"}
                                     <option value="{$vo.id}" selected>{$vo.cate_name}</option>
                                     {else /}
+                                    {if condition="$vo.parent_id neq 0"}
                                     <option value="{$vo.id}">{$vo.cate_name}</option>
+                                    {else /}
+                                    <option value="{$vo.id}" style="color: #E8E9EC;" disabled>{$vo.cate_name}</option>
+                                    {/if}
                                     {/if}
                                     {/volist}
                                 </select>
@@ -191,9 +195,9 @@
                             <label class="col-sm-3 control-label">是否首页：</label>
                             <div class="input-group col-sm-7">
                                 否<input type="radio" name="is_home" {if
-                                         condition="$res.is_home eq 0" } checked{/if} value="0" />
+                                        condition="$res.is_home eq 0" } checked{/if} value="0" />
                                 是<input type="radio" name="is_home" {if
-                                         condition="$res.is_home eq 1" } checked{/if} value="1"/>
+                                        condition="$res.is_home eq 1" } checked{/if} value="1"/>
                             </div>
                         </div>
                         <div class="form-group">

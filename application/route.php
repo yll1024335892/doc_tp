@@ -15,7 +15,7 @@ Route::get([
     'docs/show/:id'  => ['index/Document/show',[],['id'=>'\d+']],//文档的显示
     //index模块中的index控制器
     'docs/index'  => "index/index/index",//文档的首页
-    'docs/list'  => "index/index/doclist",//文档的列表页面
+    'docs/list/:id'  => ['index/index/doclist',[],['id'=>'\d+']],//文档的列表页面
     'docs/detail/:id'  => ['index/index/docdetail',[],['id'=>'\d+']],//文档的详细信息
 
 ]);
