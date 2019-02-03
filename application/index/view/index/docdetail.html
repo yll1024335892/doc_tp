@@ -74,6 +74,18 @@
                     <!--概要-->
                 <!--</a>-->
             </div>
+            <div class="doc-tree">
+              {php}
+                if($treeData){
+                    echo "<ul>";
+                        $arr=json_decode($treeData,true);
+                        foreach($arr as $key=>$val){
+                            echo "<li>".str_repeat("&nbsp;&nbsp;&nbsp;&nbsp;",$val['level']).$val['doc_name']."</li>";
+                        }
+                    echo "</ul>";
+                }
+              {/php}
+            </div>
         </div>
         <div class="ayi-hot">
             <h2>推荐阅读</h2>

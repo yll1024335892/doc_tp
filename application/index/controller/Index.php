@@ -61,11 +61,12 @@ class Index extends Controller
                 $hotRes = "";
             }
             if ($res['tag'] != null && isset($res['tag'])) {
-                return $this->fetch("", ["data" => $res, "tag" => explode(";", $res['tag']), "hotRes" => $hotRes]);
+                return $this->fetch("", ["data" => $res, "tag" => explode(";", $res['tag']), "hotRes" => $hotRes,"treeData"=>$res['doc_tree']]);
             } else {
-                return $this->fetch("", ["data" => $res, "tag" => "", "hotRes" => $hotRes]);
+                return $this->fetch("", ["data" => $res, "tag" => "", "hotRes" => $hotRes,"treeData"=>$res['doc_tree']]);
             }
         } else {
+           
             $this->error("文档不存在");
         }
 
