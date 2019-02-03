@@ -6,7 +6,6 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="stylesheet" href="__CSS__/docdetail.css" type="text/css"/>
-
 </head>
 <body>
 {include file="public/_nav"/}
@@ -14,29 +13,35 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-2 col-md-2 col-lg-2 thumbnail">
-                <img src="__IMG__/shop.jpg" class="img-responsive" />
+                {if condition="$data.thumbnail"}
+                <img src="{$data.thumbnail}" class="img-responsive"/>
+                {else /}
+                <img src="__IMG__/blank.jpg" class="img-responsive"/>
+                {/if}
             </div>
             <div class="col-sm-10 col-md-10 col-lg-10 ayi-d-d">
-                <h1 class="">Laravel+Layim+GatewayWorker打造即时通讯系统</h1>
+                <h1 class="">{$data.project_name}</h1>
                 <div class="description">
-                    极云赋（GeChat）是基于Laravel+Layim+GatewayWorker打造的的一款独立的Web端即时通讯系统，由于其极为便捷，还可以被用作网站的客服系统.
+                    {$data.description}
                 </div>
                 <div class="extra">
                     <div>
-                       <span class="btn btn-default">workerman</span>
-                            <span class="btn btn-default">layIM</span>
-                            <span class="btn btn-default">即时通讯</span>
-                            <span class="btn btn-default">webim</span>
-                            <span class="btn btn-default">极云赋</span>
+                        {if condition="$tag"}
+                           {volist name="tag" id="vo"}
+                             <span class="btn btn-default">{$vo}</span>
+                           {/volist}
+                        {/if}
                     </div>
                 </div>
                 <div class="mta">
-                    价格：<span class="ayi-price">￥30.00</span>
+                    价格：<span class="ayi-price">￥{$data.price}</span>
                 </div>
+                {if condition="$data.doc_id gt 0"}
                 <div class="ayi-pro">
-                    <button type="button" class="btn btn-success">试读</button>
+                    <a href="/docs/show/{$data.doc_id}" target="_blank"><button type="button" class="btn btn-success">试读</button></a>
                     <button type="button" class="btn btn-danger">购买</button>
                 </div>
+                {/if}
                 <div class="ayi-w-action">
                     <a class="action">
                         <i class="glyphicon glyphicon-heart-empty"></i>
@@ -63,25 +68,24 @@
         <div class="row">
             <div class="ayi-tab-contain">
                 <a class="item active" data-tab="dashboard">
-                    概要
-                </a>
-                <a class="item" data-tab="catalog">
                     目录
                 </a>
+                <!--<a class="item" data-tab="catalog">-->
+                    <!--概要-->
+                <!--</a>-->
             </div>
         </div>
         <div class="ayi-hot">
             <h2>推荐阅读</h2>
             <div  class="row">
-                <div class="thumbnail">
-                    <div><img src="__IMG__/shop.jpg" class="img-responsive"/> </div>
-                    <div><img src="__IMG__/shop.jpg" class="img-responsive"/> </div>
-                    <div><img src="__IMG__/shop.jpg" class="img-responsive"/> </div>
-                    <div><img src="__IMG__/shop.jpg" class="img-responsive"/> </div>
-                    <div><img src="__IMG__/shop.jpg" class="img-responsive"/> </div>
-                    <div><img src="__IMG__/shop.jpg" class="img-responsive"/> </div>
-                    <div><img src="__IMG__/shop.jpg" class="img-responsive"/> </div>
-                    <div><img src="__IMG__/shop.jpg" class="img-responsive"/> </div>
+                <div class="thumbnail" style="background: transparent;">
+                    {if condition="$hotRes"}
+                    {volist name="hotRes" id="vo"}
+                        <div>{if condition="$vo.thumbnail"}
+                            <img src="{$vo.thumbnail}" class="img-responsive"/>
+                            {else /}<img src="__IMG__/blank.jpg" class="img-responsive"/>{/if}<p>{$vo.project_name}</p></div>
+                    {/volist}
+                    {/if}
                 </div>
             </div>
         </div>

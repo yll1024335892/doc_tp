@@ -36,16 +36,34 @@ class Index extends Controller
     public function doclist()
     {
         $cateModel = new ProjectCategoryModel();
-        $cateList = $cateModel->where("parent_id", "neq", "0")->where("is_show","eq","1")->select();
-        return $this->fetch("",['cate'=>$cateList]);
+        $cateList = $cateModel->where("parent_id", "neq", "0")->where("is_show", "eq", "1")->select();
+        return $this->fetch("", ['cate' => $cateList]);
     }
 
     /**
      * 文档的具体的详细
      */
-    public function docdetail()
+    public function docdetail($id)
     {
-        return $this->fetch();
+        if ((int)$id > 0) {
+            $model = new ProjectModel();
+            //获取当前的文档
+            $res = $model->where("project_id", "eq", $id)->find();
+            $typeID = $res['type_id'];
+            //相似性推荐
+            $hotRes = $model->where("type_id", "eq", $typeID)->where("is_home", "eq", "1")->limit(0, 6)->select();
+            if (count($hotRes) <= 0) {
+                $hotRes = "";
+            }
+            if ($res['tag'] != null && isset($res['tag'])) {
+                return $this->fetch("", ["data" => $res, "tag" => explode(";", $res['tag']), "hotRes" => $hotRes]);
+            } else {
+                return $this->fetch("", ["data" => $res, "tag" => "", "hotRes" => $hotRes]);
+            }
+        } else {
+            $this->error("文档不存在");
+        }
+
     }
 
 
