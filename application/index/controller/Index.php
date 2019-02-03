@@ -38,10 +38,11 @@ class Index extends Controller
         //获取所有的类别
         $cateModel = new ProjectCategoryModel();
         $cateList = $cateModel->where("parent_id", "neq", "0")->where("is_show", "eq", "1")->select();
+        $cateName=$cateModel->field("cate_name")->find($id);
         //获取指定类别的数据
         $projectModel=new ProjectModel();
         $proList=$projectModel->where("type_id","eq",(int)$id)->limit(0,14)->select();
-        return $this->fetch("", ['cate' => $cateList,'project'=>$proList,"nowTypeId"=>(int)$id]);
+        return $this->fetch("", ['cate' => $cateList,'project'=>$proList,"nowTypeId"=>(int)$id,"cateName"=>$cateName['cate_name']]);
     }
 
     /**
