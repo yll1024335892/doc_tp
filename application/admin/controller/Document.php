@@ -96,6 +96,7 @@ class Document extends Controller
     {
         if (request()->isPost()) {
             $param = input('post.');
+            $param['price']=(float)$param['price'];
             unset($param['file']);
             //  $param['add_time'] = date('Y-m-d H:i:s');
             $model = new ProjectModel();
@@ -128,6 +129,7 @@ class Document extends Controller
         $model = new ProjectModel();
         if (request()->isPost()) {
             $param = input('post.');
+            $param['price']=(float)$param['price'];
             $flag = $model->addProject($param);
             return json(msg($flag['code'], $flag['data'], $flag['msg']));
         } else {

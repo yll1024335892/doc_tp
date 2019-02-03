@@ -14,105 +14,7 @@
 <section class="ayi-floor">
     <div class="ayi-floor-contain container">
         <div class="row">
-            <div class="col-sm-8 col-md-8 col-lg-8 ayi-c-left">
-                    <h1>我是php</h1>
-                    <div class="ayi-c-left-c">
-                        <img src="__IMG__/shop.jpg"/>
-                        <div class="ayi-c-l-msg">
-                            <div class="ayi-c-l-mask"></div>
-                            <div class="ayi-c-m">
-                                <h4>createjs-从入门到精通</h4>
-                                <p class="ayi-cl-price">
-                                    ￥8.88
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                <div class="ayi-c-left-c">
-                    <img src="__IMG__/shop.jpg"/>
-                    <div class="ayi-c-l-msg">
-                        <div class="ayi-c-l-mask"></div>
-                        <div class="ayi-c-m">
-                            <h4>createjs-从入门到精通</h4>
-                            <p class="ayi-cl-price">
-                                ￥8.88
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="ayi-c-left-c">
-                    <img src="__IMG__/shop.jpg"/>
-                    <div class="ayi-c-l-msg">
-                        <div class="ayi-c-l-mask"></div>
-                        <div class="ayi-c-m">
-                            <h4>createjs-从入门到精通</h4>
-                            <p class="ayi-cl-price">
-                                ￥8.88
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="ayi-c-left-c">
-                    <img src="__IMG__/shop.jpg"/>
-                    <div class="ayi-c-l-msg">
-                        <div class="ayi-c-l-mask"></div>
-                        <div class="ayi-c-m">
-                            <h4>createjs-从入门到精通</h4>
-                            <p class="ayi-cl-price">
-                                ￥8.88
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="ayi-c-left-c">
-                    <img src="__IMG__/shop.jpg"/>
-                    <div class="ayi-c-l-msg">
-                        <div class="ayi-c-l-mask"></div>
-                        <div class="ayi-c-m">
-                            <h4>createjs-从入门到精通</h4>
-                            <p class="ayi-cl-price">
-                                ￥8.88
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="ayi-c-left-c">
-                    <img src="__IMG__/shop.jpg"/>
-                    <div class="ayi-c-l-msg">
-                        <div class="ayi-c-l-mask"></div>
-                        <div class="ayi-c-m">
-                            <h4>createjs-从入门到精通</h4>
-                            <p class="ayi-cl-price">
-                                ￥8.88
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="ayi-c-left-c">
-                    <img src="__IMG__/shop.jpg"/>
-                    <div class="ayi-c-l-msg">
-                        <div class="ayi-c-l-mask"></div>
-                        <div class="ayi-c-m">
-                            <h4>createjs-从入门到精通</h4>
-                            <p class="ayi-cl-price">
-                                ￥8.88
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="ayi-c-left-c">
-                    <img src="__IMG__/shop.jpg"/>
-                    <div class="ayi-c-l-msg">
-                        <div class="ayi-c-l-mask"></div>
-                        <div class="ayi-c-m">
-                            <h4>createjs-从入门到精通</h4>
-                            <p class="ayi-cl-price">
-                                ￥8.88
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <div class="col-sm-8 col-md-8 col-lg-8 ayi-c-left"></div>
             <div class="col-sm-4 col-md-4 col-lg-4 ayi-c-right">
                 <div class="ayi-ad"><a href="javascript:" target="_blank" title="我是广告"><img src="__IMG__/bg.jpg" /></a></div>
                 <div class="ayi-ad"><a href="javascript:" target="_blank" title="我是广告"><img src="__IMG__/bg.jpg" /></a></div>
@@ -123,51 +25,34 @@
                 <div class="ayi-ad"><a href="javascript:" target="_blank" title="我是广告"><img src="__IMG__/bg.jpg" /></a></div>
                 <div class="ayi-ad"><a href="javascript:" target="_blank" title="我是广告"><img src="__IMG__/bg.jpg" /></a></div>
             </div>
-
         </div>
-
+        {volist name="cateList" id="vo"}
         <div class="row">
             <div class="col-sm-8 col-md-8 col-lg-8 ayi-c-left">
-                    <h1>我是php</h1>
-                    <div class="ayi-c-left-c"><img src="__IMG__/shop.jpg"/></div>
-                    <div class="ayi-c-left-c"><img src="__IMG__/shop.jpg"/></div>
-                    <div class="ayi-c-left-c"><img src="__IMG__/shop.jpg"/></div>
-                    <div class="ayi-c-left-c"><img src="__IMG__/shop.jpg"/></div>
-                    <div class="ayi-c-left-c"><img src="__IMG__/shop.jpg"/></div>
-                    <div class="ayi-c-left-c"><img src="__IMG__/shop.jpg"/></div>
-                    <div class="ayi-c-left-c"><img src="__IMG__/shop.jpg"/></div>
-                    <div class="ayi-c-left-c"><img src="__IMG__/shop.jpg"/></div>
+                <h1>{$vo.cate_name}</h1>
+                {volist name="$vo.list" id="vo1"}
+                    <a href='{if condition="$vo1.doc_id eq 0"}javascript:{else /}/docs/show/{$vo1.doc_id}{/if}' target="_blank">
+                    <div class="ayi-c-left-c">
+                        {if condition="$vo1.thumbnail"}
+                            <img src="{$vo1.thumbnail}"/>
+                        {else /}
+                            <img src="__IMG__/blank.jpg"/>
+                        {/if}
+                        <div class="ayi-c-l-msg">
+                            <div class="ayi-c-l-mask"></div>
+                            <div class="ayi-c-m">
+                                <h4>{$vo1.project_name}</h4>
+                                <p class="ayi-cl-price">
+                                    ￥{$vo1.price}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    </a>
+                {/volist}
             </div>
         </div>
-
-        <div class="row">
-            <div class="col-sm-8 col-md-8 col-lg-8 ayi-c-left">
-                <h1>我是php</h1>
-                <div class="ayi-c-left-c"><img src="__IMG__/shop.jpg"/></div>
-                <div class="ayi-c-left-c"><img src="__IMG__/shop.jpg"/></div>
-                <div class="ayi-c-left-c"><img src="__IMG__/shop.jpg"/></div>
-                <div class="ayi-c-left-c"><img src="__IMG__/shop.jpg"/></div>
-                <div class="ayi-c-left-c"><img src="__IMG__/shop.jpg"/></div>
-                <div class="ayi-c-left-c"><img src="__IMG__/shop.jpg"/></div>
-                <div class="ayi-c-left-c"><img src="__IMG__/shop.jpg"/></div>
-                <div class="ayi-c-left-c"><img src="__IMG__/shop.jpg"/></div>
-            </div>
-        </div>
-
-
-        <div class="row">
-            <div class="col-sm-8 col-md-8 col-lg-8 ayi-c-left">
-                <h1>我是php</h1>
-                <div class="ayi-c-left-c"><img src="__IMG__/shop.jpg"/></div>
-                <div class="ayi-c-left-c"><img src="__IMG__/shop.jpg"/></div>
-                <div class="ayi-c-left-c"><img src="__IMG__/shop.jpg"/></div>
-                <div class="ayi-c-left-c"><img src="__IMG__/shop.jpg"/></div>
-                <div class="ayi-c-left-c"><img src="__IMG__/shop.jpg"/></div>
-                <div class="ayi-c-left-c"><img src="__IMG__/shop.jpg"/></div>
-                <div class="ayi-c-left-c"><img src="__IMG__/shop.jpg"/></div>
-                <div class="ayi-c-left-c"><img src="__IMG__/shop.jpg"/></div>
-            </div>
-        </div>
+        {/volist}
     </div>
 </section>
 {include file="public/_footer" /}

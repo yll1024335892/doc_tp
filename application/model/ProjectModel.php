@@ -186,6 +186,8 @@ class ProjectModel extends Model
      * @param $project_id
      */
     public function upDateTree($data,$project_id){
-        $this->save(["doc_tree"=>$data],["project_id"=>$project_id]);
+        if(isset($data) && $data!=null){
+            $this->save(["doc_tree"=>$data,"doc_id"=>json_decode($data,true)[0]['doc_id']],["project_id"=>$project_id]);
+        }
     }
 }

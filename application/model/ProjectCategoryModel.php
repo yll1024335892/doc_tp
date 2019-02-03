@@ -34,14 +34,13 @@ class ProjectCategoryModel extends Model
     public function insertNode($param)
     {
         try{
-
             $this->save($param);
             return msg(1, '', '添加节点成功');
         }catch(PDOException $e){
-
             return msg(-2, '', $e->getMessage());
         }
     }
+
 
     /**
      * 编辑栏目
