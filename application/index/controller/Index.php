@@ -72,5 +72,16 @@ class Index extends Controller
 
     }
 
+    public function alipay($id){
+        $arr=[
+            'WIDout_trade_no'=>"201902031899992052143",
+            'WIDsubject'=>'在线支付',
+            'WIDtotal_amount'=>'0.01',
+            'WIDbody'=>'商品d的body'
+        ];
+       // session('order',$order);
+        alipay($arr, 'notify_url', 'return_url');
+    }
+
 
 }

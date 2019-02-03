@@ -17,7 +17,7 @@ Route::get([
     'docs/index'  => "index/index/index",//文档的首页
     'docs/list/:id'  => ['index/index/doclist',[],['id'=>'\d+']],//文档的列表页面
     'docs/detail/:id'  => ['index/index/docdetail',[],['id'=>'\d+']],//文档的详细信息
-
+    'docs/pay/:id'  => ['index/index/alipay',[],['id'=>'\d+']],
 ]);
 Route::post([
     'docs/save'=> "admin/Document/save",//保存文档
