@@ -75,6 +75,7 @@ class Document extends Controller
                 $imgSrc = $vo['thumbnail'] ? $vo['thumbnail'] : "/static/admin/images/blank_img.jpg";
                 $selectResult[$key]['thumbnail'] = '<img src="' . $imgSrc . '" width="40px" height="40px" onclick="javascript:scaleImg(this)">';
                 $selectResult[$key]['cate']=$selectResult[$key]['type_id'];
+                $selectResult[$key]['is_home']=$selectResult[$key]['is_home']?"是":"否";
                 if (isset($vo['doc_tree']) && $vo['doc_tree'] != null) {
                     $selectResult[$key]['operate'] = showOperate($this->makeButton($vo['project_id'], json_decode($vo['doc_tree'], true)[0]['doc_id']), true);
                 } else {
