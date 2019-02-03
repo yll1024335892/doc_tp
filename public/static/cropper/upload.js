@@ -208,6 +208,8 @@
 							'"width":' + event.detail.width,
 							'"rotate":' + event.detail.rotate + '}'
 						].join();
+						$("#cropWidth").html("width:"+Math.round(event.detail.width)+"px");
+						$("#cropHeight").html("height:"+Math.round(event.detail.height)+"px");
 						_this.$avatarData.val(json);
 					}
 				});
@@ -319,7 +321,6 @@
 				msg,
 				'</div>'
 			].join('');
-
 			this.$avatarUpload.after($alert);
 		}
 	};
