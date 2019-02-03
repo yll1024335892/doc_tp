@@ -26,11 +26,10 @@
                 <div class="ayi-ad"><a href="javascript:" target="_blank" title="我是广告"><img src="__IMG__/bg.jpg" /></a></div>
             </div>
         </div>
-        {volist name="cateList" id="vo"}
         <div class="row">
             <div class="col-sm-8 col-md-8 col-lg-8 ayi-c-left">
-                <h1>{$vo.cate_name}</h1>
-                {volist name="$vo.list" id="vo1"}
+                <h1>热门推荐</h1>
+                {volist name="list" id="vo1"}
                     <a href='{if condition="$vo1.doc_id eq 0"}javascript:{else /}/docs/show/{$vo1.doc_id}{/if}' target="_blank">
                     <div class="ayi-c-left-c">
                         {if condition="$vo1.thumbnail"}
@@ -52,7 +51,7 @@
                 {/volist}
             </div>
         </div>
-        {/volist}
+
     </div>
 </section>
 {include file="public/_footer" /}

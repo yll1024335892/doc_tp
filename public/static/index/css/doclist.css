@@ -40,6 +40,7 @@
 .ayi-floor { width: 100%; background: #f1f3f4; clear: both; margin-top: 50px; }
 .ayi-floor .ayi-floor-contain .row { position: relative; clear: both; }
 .ayi-floor .ayi-floor-contain .ayi-c-left h1 { padding-left: 20px; font-size: 18px; color: #666; font-weight: normal; }
+.ayi-floor .ayi-floor-contain .ayi-c-left h1 span{ margin-bottom: 4px; display: inline-block; cursor: pointer; padding: 10px;}
 .ayi-floor .ayi-floor-contain .ayi-c-left .ayi-c-left-c { width: 160px; margin-left: 20px; margin-bottom: 20px; float: left; position: relative; cursor: pointer; -moz-border-radius: 0.4rem; -webkit-border-radius: 0.4rem; border-radius: 0.4rem; }
 .ayi-floor .ayi-floor-contain .ayi-c-left .ayi-c-left-c img { width: 100%; -webkit-filter: blur(0px); filter: blur(0px); -moz-border-radius: inherit; -webkit-border-radius: inherit; border-radius: inherit; }
 .ayi-floor .ayi-floor-contain .ayi-c-left .ayi-c-left-c .ayi-c-l-msg { position: absolute; top: 0px; width: 100%; height: 100%; -moz-border-radius: inherit; -webkit-border-radius: inherit; border-radius: inherit; }
