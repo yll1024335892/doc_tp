@@ -20,7 +20,6 @@ class Articles extends Base
         if(request()->isAjax()){
 
             $param = input('param.');
-
             $limit = $param['pageSize'];
             $offset = ($param['pageNumber'] - 1) * $limit;
 
