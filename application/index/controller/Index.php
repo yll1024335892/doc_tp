@@ -41,7 +41,9 @@ class Index extends Controller
         $cateName=$cateModel->field("cate_name")->find($id);
         //获取指定类别的数据
         $projectModel=new ProjectModel();
-        $proList=$projectModel->where("type_id","eq",(int)$id)->limit(0,14)->select();
+        $proList=$projectModel->where("type_id","eq",(int)$id)->where("project_open_state","eq","1")->paginate(18);
+        $page=$proList->render();
+        $this->assign("page",$page);
         return $this->fetch("", ['cate' => $cateList,'project'=>$proList,"nowTypeId"=>(int)$id,"cateName"=>$cateName['cate_name']]);
     }
 
@@ -72,16 +74,7 @@ class Index extends Controller
 
     }
 
-    public function alipay($id){
-        $arr=[
-            'WIDout_trade_no'=>"201902031899992052143111",
-            'WIDsubject'=>'在线支付',
-            'WIDtotal_amount'=>'0.01',
-            'WIDbody'=>'商品d的body'
-        ];
-       // session('order',$order);
-        alipay($arr, 'notify_url', 'return_url');
-    }
+
 
 
 }
