@@ -12,6 +12,7 @@
 namespace app\admin\controller;
 
 use app\model\AdModel;
+use app\model\AdTypeModel;
 use think\Controller;
 
 class Ad extends Controller
@@ -44,22 +45,39 @@ class Ad extends Controller
         return $this->fetch();
     }
 
-    public function typeList()
-    {
-        if(request()->isAjax()){
-//            $node=new ProjectCategoryModel();
-//            $nodes = $node->getCategoryList();
-//            $nodes = getTree(objToArray($nodes), false);
-//            return json(msg(1, $nodes, 'ok'));
-        }
-        return $this->fetch();
-    }
+
     /**
      * 广告得位置
      */
     public function adPosition()
     {
+        if(request()->isAjax()){
+            $adtypeModel=new AdTypeModel();
+            $nodes = $adtypeModel->getAdTypeList();
+            $nodes = getTree(objToArray($nodes), false);
+            return json(msg(1, $nodes, 'ok'));
+        }
         return $this->fetch();
+    }
+
+    /**
+     * 广告位置的添加
+     */
+    public function adPositionadd(){
+        $param = input('post.');
+        $node = new AdTypeModel();
+        $flag = $node->insertNode($param);
+        return json(msg($flag['code'], $flag['data'], $flag['msg']));
+    }
+
+    /**
+     * 广告位置的编辑
+     */
+    public function adPositionedit(){
+        $param = input('post.');
+        $node = new AdTypeModel();
+        $flag = $node->editNode($param);
+        return json(msg($flag['code'], $flag['data'], $flag['msg']));
     }
 
     /**
