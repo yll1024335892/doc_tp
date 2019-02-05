@@ -12,15 +12,15 @@
 namespace app\admin\controller;
 
 use app\model\AdModel;
+use think\Controller;
 
-class Ad extends Base
+class Ad extends Controller
 {
     /**
      * 广告的列表
      */
     public function index()
     {
-
         if (request()->isAjax()) {
             $param = input('param.');
             $limit = $param['pageSize'];
@@ -33,7 +33,7 @@ class Ad extends Base
             $selectResult = $adModel->getAdsByWhere($where, $offset, $limit);
 
             foreach ($selectResult as $key => $vo) {
-                $imgSrc = $vo['img'] ? $vo['img'] : "/static/admin/images/blank_img.jpg";
+                $imgSrc = $vo['thumbnail'] ? $vo['thumbnail'] : "/static/admin/images/blank_img.jpg";
                 $selectResult[$key]['thumbnail'] = '<img src="' . $imgSrc . '" width="40px" height="40px">';
                 $selectResult[$key]['operate'] = showOperate($this->makeButton($vo['id']));
             }
@@ -44,6 +44,16 @@ class Ad extends Base
         return $this->fetch();
     }
 
+    public function typeList()
+    {
+        if(request()->isAjax()){
+//            $node=new ProjectCategoryModel();
+//            $nodes = $node->getCategoryList();
+//            $nodes = getTree(objToArray($nodes), false);
+//            return json(msg(1, $nodes, 'ok'));
+        }
+        return $this->fetch();
+    }
     /**
      * 广告得位置
      */
@@ -57,6 +67,17 @@ class Ad extends Base
      */
     public function addAd()
     {
+        if(request()->isPost()){
+            $param = input('post.');
+            $param['expired']=strtotime($param['expired']);
+            $adModel=new AdModel();
+            $result = $adModel->save($param);
+            if(false === $result){
+                return json(msg(-1, '', $this->getError()));
+            }else{
+                return json(msg(1, url('Ad/index'), '添加文章成功'));
+            }
+        }
         return $this->fetch();
     }
 
@@ -78,7 +99,7 @@ class Ad extends Base
     {
         return [
             '编辑' => [
-                'auth' => 'document/editProject',
+                'auth' => 'document/editproject',
                 'href' => url('document/editProject', ['id' => $id]),
                 'btnStyle' => 'primary',
                 'icon' => 'fa fa-paste'
@@ -90,7 +111,7 @@ class Ad extends Base
                 'icon' => 'fa fa-edit'
             ],
             '删除' => [
-                'auth' => 'document/deleteProject',
+                'auth' => 'document/deleteproject',
                 'href' => "javascript:proDel(" . $id . ")",
                 'btnStyle' => 'danger',
                 'icon' => 'fa fa-trash-o'

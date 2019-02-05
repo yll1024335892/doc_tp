@@ -499,7 +499,7 @@ class Document extends Controller
     {
         return [
             '编辑' => [
-                'auth' => 'document/editProject',
+                'auth' => 'document/editproject',
                 'href' => url('document/editProject', ['id' => $id]),
                 'btnStyle' => 'primary',
                 'icon' => 'fa fa-paste'
@@ -517,7 +517,7 @@ class Document extends Controller
                 'icon' => 'fa fa-eye'
             ],
             '删除' => [
-                'auth' => 'document/deleteProject',
+                'auth' => 'document/deleteproject',
                 'href' => "javascript:proDel(" . $id . ")",
                 'btnStyle' => 'danger',
                 'icon' => 'fa fa-trash-o'

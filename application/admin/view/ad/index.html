@@ -20,9 +20,12 @@
             <h5>广告列表</h5>
         </div>
         <div class="ibox-content">
-            <div class="form-group clearfix col-sm-1">
-                {if authCheck('articles/articleadd')}
-                <a href="{:url('articles/articleadd')}"><button class="btn btn-outline btn-primary" type="button">添加文章</button></a>
+            <div class="form-group clearfix col-sm-8">
+                {if authCheck('ad/addad')}
+                <a href="{:url('ad/addAd')}"><button class="btn btn-outline btn-primary pull-left" style="margin-right: 10px;" type="button">添加广告</button></a>
+                {/if}
+                {if authCheck('ad/adposition')}
+                <a href="{:url('ad/adPosition')}"><button class="btn btn-outline btn-primary pull-left" type="button">添加广告位置</button></a>
                 {/if}
             </div>
             <!--搜索框开始-->
@@ -130,7 +133,6 @@
                     layer.alert(res.msg, {title: '友情提示', icon: 2});
                 }
             });
-
             layer.close(index);
         })
 
