@@ -4,35 +4,29 @@
 我的购买
 {/block}
 {block name="body"}
-<div class="row placeholders">
+{if condition="$list"}
+{volist name="list" id="vo"}
+<div class="row">
     <div class="col-sm-2">
-        <img src="images/img.jpg" class="img-responsive" alt="Generic placeholder thumbnail">
+        {if condition="$vo.thumbnail"}
+        <img src="{$vo.thumbnail}" class="img-responsive" alt="{$vo.project_name}"/>
+        {else /}
+        <img src="__IMG__/blank.jpg" class="img-responsive" alt="{$vo.project_name}"/>
+        {/if}
     </div>
     <div class="col-sm-10">
-        <h4>标题</h4>
-        <span class="text-muted">简单的描述信息</span>
+        <h4>{$vo.project_name}</h4>
+        <span class="text-muted">{$vo.description}</span>
         <div>
-            <button type="button" class="btn btn-info">阅读</button>
+            <a href="/docs/detail/{$vo.project_id}"><button type="button" class="btn btn-info">详细</button></a>
         </div>
     </div>
 </div>
+{/volist}
+{else /}
+<div class="alert alert-info" role="alert">赞无购买的文档</div>
+{/if}
 <div class="row" style="text-align: center">
-    <ul class="pagination">
-        <li>
-            <a href="#" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-            </a>
-        </li>
-        <li><a href="#">1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">4</a></li>
-        <li><a href="#">5</a></li>
-        <li>
-            <a href="#" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-            </a>
-        </li>
-    </ul>
+    {$page}
 </div>
 {/block}
