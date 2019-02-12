@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>{block name="title"}会员中心{/block}-阿翼文档</title>
+    <title>会员中心-{block name="title"}{/block}-阿翼文档</title>
     <link href="__CSS__/bootstrap.min.css" rel="stylesheet">
     <link href="__CSS__/ie10-viewport-bug-workaround.css" rel="stylesheet">
     <link href="__CSS__/member.css" rel="stylesheet">
@@ -19,19 +19,20 @@
 </head>
 
 <body>
-<div class="container">
+{include file="public/_nav" /}
+<div class="container" style="margin-top: 50px;">
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
-                <li class="active"><a href="index.html">我的收藏</a></li>
-                <li><a href="buy.html">我的购买</a></li>
+                <li {if condition="$active eq '/member/index'"}class="active"{/if}><a href="/member/index">我的收藏</a></li>
+                <li {if condition="$active eq '/member/buy'"}class="active"{/if}><a href="/member/buy">我的购买</a></li>
             </ul>
             <ul class="nav nav-sidebar">
-                <li><a href="reset.html">修改密码</a></li>
-                <li><a href="message.html">我的消息</a></li>
+                <li {if condition="$active eq '/member/reset'"}class="active"{/if}><a href="/member/reset">修改密码</a></li>
+                <li {if condition="$active eq '/member/message'"}class="active"{/if}><a href="/member/message">我的消息</a></li>
             </ul>
         </div>
-        <div class="col-sm-9  col-sm-offset-3 col-md-10 main">
+        <div class="col-sm-8  col-sm-offset-3 col-md-9 main">
             <h4 class="page-header">{block name="menu_name"}menu_name{/block}</h4>
             {block name="body"}body{/block}
         </div>

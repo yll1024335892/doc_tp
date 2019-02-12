@@ -12,13 +12,14 @@
 namespace app\index\controller;
 
 
-class Member extends Common
+class Member extends Base
 {
     /**
      * 我的收藏
      * @return mixed
      */
     public function index(){
+        $this->assign("active","/member/index");
         return $this->fetch();
     }
 
@@ -27,6 +28,7 @@ class Member extends Common
      * @return mixed
      */
     public function buy(){
+        $this->assign("active","/member/buy");
         return $this->fetch();
     }
 
@@ -35,6 +37,7 @@ class Member extends Common
      * @return mixed
      */
     public function reset(){
+        $this->assign("active","/member/reset");
         return $this->fetch();
     }
 
@@ -43,6 +46,7 @@ class Member extends Common
      * @return mixed
      */
     public function message(){
+        $this->assign("active","/member/message");
         return $this->fetch();
     }
 

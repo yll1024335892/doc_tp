@@ -13,22 +13,21 @@ namespace app\index\controller;
 
 
 use think\Controller;
-
+use think\Request;
 class Base  extends Controller
 {
     public function _initialize()
     {
-        if(empty(session('user')) || empty(session('id'))){
-//            $loginUrl = url('login/index');
-//            if(request()->isAjax()){
-//                return msg(111, $loginUrl, '登录超时');
-//            }
-//            $this->redirect($loginUrl);
+        if(empty(session('username')) || empty(session('id'))){
+            $loginUrl = "/auth/login";
+            if(request()->isAjax()){
+                return msg(111, $loginUrl, '登录超时');
+            }
+            $this->redirect($loginUrl);
         }
         $this->assign([
-            'head'     => session('head'),
-            'username' => session('user'),
-            'rolename' => session('role')
+            'id'     => session('id'),
+            'username' => session('username')
         ]);
     }
 }
