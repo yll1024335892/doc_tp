@@ -20,5 +20,7 @@ class CollectionModel extends Model
     protected $pk = "id";//自增的id
     protected $autoWriteTimestamp = true;//自动添加时间戳
 
-    
+    public function deleteCollection($id){
+       return $this->where("id","eq",$id)->delete();
+    }
 }

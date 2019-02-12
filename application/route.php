@@ -25,6 +25,7 @@ Route::get([
     'auth/logigout'=>"index/login/loginOut",//退出登录
     //index模块的member控制器
     'member/index'=>"index/member/index",//我的收藏
+    'member/decollection/:id'=>['index/member/decollection',[],['id'=>'\d+']],
     'member/buy'=>"index/member/buy",//我的购买
     'member/reset'=>"index/member/reset",//修改密码
     'member/message'=>"index/member/message",//我的消息

@@ -21,47 +21,55 @@ class Member extends Base
      * 我的收藏
      * @return mixed
      */
-    public function index(){
-        $this->assign("active","/member/index");
-        $collectModel=new CollectionModel();
-        $userId=session("id");
-        $res=$collectModel->alias('c')
-            ->field('c.id,c.project_id,p.project_name,p.description,p.thumbnail')
-            ->join('project p', 'c.project_id = p.project_id')
-           // ->join("order o","p.project_id = o.project_id","RIGHT")
+    public function index()
+    {
+        $this->assign("active", "/member/index");
+        $collectModel = new CollectionModel();
+        $userId = session("id");
+        $res = $collectModel->alias('c')
+            ->field('c.id,c.project_id,c.is_price,p.project_name,p.description,p.thumbnail')
+            ->join('project p', 'c.project_id = p.project_id', "RIGHT")
             ->where('c.user_id', $userId)
-            ->paginate(1);
-        var_dump($collectModel->getLastSql());
-        $page=$res->render();
-        $this->assign("page",$page);
-        return $this->fetch("",['list'=>$res]);
+            ->paginate(18);
+        $page = $res->render();
+        $this->assign(["page"=>$page]);
+        return $this->fetch("", ['list' => count($res) >0 ? $res :""]);
+    }
+
+    public function decollection($id)
+    {
+        $collectionModel = new CollectionModel();
+        $res = $collectionModel->deleteCollection($id);
+        $this->redirect("/member/index");
     }
 
     /**
      * 我的购买
      * @return mixed
      */
-    public function buy(){
-        $this->assign("active","/member/buy");
-        $orderModel=new OrderModel();
-        $userId=session("id");
-        $res=$orderModel->alias('u')
+    public function buy()
+    {
+        $this->assign("active", "/member/buy");
+        $orderModel = new OrderModel();
+        $userId = session("id");
+        $res = $orderModel->alias('u')
             ->field('u.id,u.project_id,p.project_name,p.description,p.thumbnail')
             ->join('project p', 'u.project_id = p.project_id')
             ->where('u.user_id', $userId)
-            ->where("u.is_pay","eq","1")
+            ->where("u.is_pay", "eq", "1")
             ->paginate(18);
-        $page=$res->render();
-        $this->assign("page",$page);
-        return $this->fetch("",['list'=>$res]);
+        $page = $res->render();
+        $this->assign("page", $page);
+        return $this->fetch("", ['list' => $res]);
     }
 
     /**
      * 重置密码
      * @return mixed
      */
-    public function reset(){
-        $this->assign("active","/member/reset");
+    public function reset()
+    {
+        $this->assign("active", "/member/reset");
         return $this->fetch();
     }
 
@@ -69,8 +77,9 @@ class Member extends Base
      * 我的消息
      * @return mixed
      */
-    public function message(){
-        $this->assign("active","/member/message");
+    public function message()
+    {
+        $this->assign("active", "/member/message");
         return $this->fetch();
     }
 

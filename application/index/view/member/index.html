@@ -18,9 +18,11 @@
         <h4>{$vo.project_name}</h4>
         <span class="text-muted">{$vo.description}</span>
         <div>
-            <button type="button" class="btn btn-danger">删除</button>
-            <button type="button" class="btn btn-success">购买</button>
-            <button type="button" class="btn btn-info">阅读</button>
+            <a href="/member/decollection/{$vo.id}"><button type="button" class="btn btn-danger">删除</button></a>
+            {if condition="$vo.is_price eq 0"}
+                <button type="button" class="btn btn-success">购买</button>
+            {/if}
+            <a href="/docs/detail/{$vo.project_id}"><button type="button" class="btn btn-info">阅读</button></a>
         </div>
     </div>
 </div>
