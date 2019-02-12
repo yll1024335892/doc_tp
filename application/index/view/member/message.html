@@ -1,0 +1,32 @@
+{extend name="Public:member:_layout" /}
+{block name="title"}我的消息{/block}
+{block name="menu_name"}
+我的消息
+{/block}
+{block name="body"}
+<div class="row placeholders">
+    <div class="jumbotron">
+        <p>里面放些内容</p>
+    </div>
+    <div class="alert alert-info" role="alert">暂时没有内容</div>
+</div>
+<div class="row" style="text-align: center;">
+    <ul class="pagination">
+        <li>
+            <a href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        <li><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">5</a></li>
+        <li>
+            <a href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+</div>
+{/block}

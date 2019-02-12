@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>{block name="title"}会员中心{/block}-阿翼文档</title>
+    <link href="__CSS__/bootstrap.min.css" rel="stylesheet">
+    <link href="__CSS__/ie10-viewport-bug-workaround.css" rel="stylesheet">
+    <link href="__CSS__/member.css" rel="stylesheet">
+    <!--[if lt IE 9]><script src="__JS__/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="__JS__/ie-emulation-modes-warning.js"></script>
+    <!--[if lt IE 9]>
+    <script src="__JS__/html5shiv.min.js"></script>
+    <script src="__JS__/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-sidebar">
+                <li class="active"><a href="index.html">我的收藏</a></li>
+                <li><a href="buy.html">我的购买</a></li>
+            </ul>
+            <ul class="nav nav-sidebar">
+                <li><a href="reset.html">修改密码</a></li>
+                <li><a href="message.html">我的消息</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-9  col-sm-offset-3 col-md-10 main">
+            <h4 class="page-header">{block name="menu_name"}menu_name{/block}</h4>
+            {block name="body"}body{/block}
+        </div>
+    </div>
+</div>
+<script src="__JS__/jquery.min.js"></script>
+<script src="__JS__/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+{extend name="Public:member:_layout" /}
+{block name="title"}我的收藏{/block}
+{block name="menu_name"}
+    我的收藏
+{/block}
+{block name="body"}
+<div class="row placeholders">
+    <div class="col-sm-2">
+        <img src="images/img.jpg" class="img-responsive" alt="">
+    </div>
+    <div class="col-sm-10">
+        <h4>标题</h4>
+        <span class="text-muted">简单的描述信息</span>
+        <div>
+            <button type="button" class="btn btn-danger">删除</button>
+            <button type="button" class="btn btn-success">购买</button>
+            <button type="button" class="btn btn-info">阅读</button>
+        </div>
+    </div>
+</div>
+<div class="row" style="text-align: center">
+    <ul class="pagination">
+        <li>
+            <a href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        <li><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">5</a></li>
+        <li>
+            <a href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+</div>
+{/block}
