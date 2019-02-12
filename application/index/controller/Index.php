@@ -3,10 +3,9 @@ namespace app\index\controller;
 
 use app\model\ProjectCategoryModel;
 use app\model\ProjectModel;
-use think\Controller;
 use think\Db;
 
-class Index extends Controller
+class Index extends Common
 {
     /**
      * 文档的首页显示

@@ -8,11 +8,11 @@
 // +----------------------------------------------------------------------
 // | Author: 深圳市阿翼互联网有限公司
 // +----------------------------------------------------------------------
-namespace app\index\validate;
+namespace app\admin\validate;
 
 use think\Validate;
 
-class UserValidate extends Validate
+class AdminValidate extends Validate
 {
     protected $rule = [
         ['userName', 'require', '用户名不能为空'],

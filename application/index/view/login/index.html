@@ -24,26 +24,66 @@
       <i class="iconpic iconpic-logo"></i>
     </div>
     <div class="row clearfix form-title">网站登录</div>
-    <form class="form form-horizontal" id="form-login">
+    <p id="err_msg"></p>
+    <form class="form form-horizontal" id="form-login" onSubmit ="return false;">
       <div class="row clearfix">
-        <input type="email" class="input-text radius size-L" name="email" id="email" value="" placeholder="Email">
+        <input type="email" class="input-text radius size-L" name="email" id="email" value="" placeholder="邮箱">
       </div>
       <div class="row clearfix">
-        <input type="password" class="input-text radius size-L" name="password" id="password" value="" placeholder="password">
+        <input type="password" class="input-text radius size-L" name="password" id="password" value="" placeholder="密码">
+      </div>
+      <div class="row clearfix" style="text-align: left;">
+        <input type="text" class="input-text radius size-L" name="code" style="width: 50%;" id="code" value="" placeholder="验证码">
+        <img id="verify" src="{:url('checkVerify')}" onclick="javascript:this.src='{:url('checkVerify')}?tm='+Math.random();" style="height:40px; width:130px;cursor: pointer"/>
       </div>
       <div class="row clearfix">
-        <button class="btn btn-primary btn-block radius size-L">登 录</button>
+        <button class="btn btn-success btn-block radius size-L" id="login_btn">登 录</button>
       </div>
       <div class="row clearfix f-12">
-        <a href="/password/reset/">忘记密码?</a>
+        <a href="/auth/forgot">忘记密码?</a>
         <div class="line mt-20"></div>
       </div>
 
-      <div class="row clearfix">没有账户? <a href="reg.html"><strong>注 册</strong></a></div>
+      <div class="row clearfix">没有账户? <a href="/auth/register"><strong>注 册</strong></a></div>
     </form>
   </div>
 </div>
 <script type="text/javascript" src="__JS__/jquery.min.js"></script>
 <script type="text/javascript" src="__JS__/H-ui.min.js"></script>
+<script type="text/javascript">
+  document.onkeydown=function(event){
+    var e = event || window.event || arguments.callee.caller.arguments[0];
+    if(e && e.keyCode==13){ // enter 键
+      $('#login_btn').click();
+    }
+  };
+  var lock = false;
+  $(function () {
+    $('#login_btn').click(function(){
+      if(lock){
+        return;
+      }
+      lock = true;
+      $('#err_msg').hide();
+      $('#login_btn').removeClass('btn-success').addClass('btn-danger').val('登陆中...');
+      var email = $('#email').val();
+      var password = $('#password').val();
+      var code = $('#code').val();
+      $.post("{:url('login/doLogin')}",{'user_name':email, 'password':password, 'code':code},function(data){
+        lock = false;
+        $('#login_btn').val('登录').removeClass('btn-danger').addClass('btn-success');
+        if(data.code!=1){
+          $('#verify').attr('src', '{:url('checkVerify')}?tm='+Math.random());
+          $('#code').val('');
+          $('#err_msg').show().html("<span style='color:red'>"+data.msg+"</span>");
+          return;
+        }else{
+          window.location.href=data.data;
+        }
+      });
+
+    });
+  });
+</script>
 </body>
 </html>

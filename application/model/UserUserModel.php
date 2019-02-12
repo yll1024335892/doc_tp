@@ -1,6 +1,6 @@
 <?php
 // +----------------------------------------------------------------------
-// | 阿翼
+// | 阿翼  Date: 2019/2/12  Time: 9:26
 // +----------------------------------------------------------------------
 // | Copyright (c) 2016~2022 深圳市阿翼互联网有限公司 All rights reserved.
 // +----------------------------------------------------------------------
@@ -8,16 +8,25 @@
 // +----------------------------------------------------------------------
 // | Author: 深圳市阿翼互联网有限公司
 // +----------------------------------------------------------------------
-namespace app\index\validate;
 
-use think\Validate;
+namespace app\model;
 
-class UserValidate extends Validate
+
+use think\Model;
+
+class UserUserModel extends Model
 {
-    protected $rule = [
-        ['userName', 'require', '用户名不能为空'],
-        ['password', 'require', '密码不能为空'],
-        ['code', 'require', '验证码不能为空']
-    ];
+    protected $name = 'user_user';//表名
+    protected $pk = "id";//自增的id
+    protected $autoWriteTimestamp = true;//自动添加时间戳
+
+    /**
+     * 根据用户名检测用户数据
+     * @param $userName
+     */
+    public function checkUser($email)
+    {
+        return  $this->where("email","eq",$email)->find();
+    }
 
 }

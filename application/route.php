@@ -18,6 +18,11 @@ Route::get([
     'docs/list/:id'  => ['index/index/doclist',[],['id'=>'\d+']],//文档的列表页面
     'docs/detail/:id'  => ['index/index/docdetail',[],['id'=>'\d+']],//文档的详细信息
     'docs/pay/:id'  => ['index/index/alipay',[],['id'=>'\d+']],
+    //登录相关的路由
+    'auth/login'  => "index/login/index",//登录
+    'auth/register'  => "index/login/reg",//注册
+    'auth/forgot' =>"index/login/reset",//找回密码
+    'auth/logigout'=>"index/login/loginOut",//退出登录
 ]);
 Route::post([
     'docs/save'=> "admin/Document/save",//保存文档

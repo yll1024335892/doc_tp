@@ -13,10 +13,9 @@ namespace app\index\controller;
 
 use app\model\DocumentModel;
 use app\model\ProjectModel;
-use think\Controller;
 use think\Request;
 
-class Document  extends Controller
+class Document  extends Common
 {
     public function show($id){
         $doc_id = intval($id);

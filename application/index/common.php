@@ -26,5 +26,8 @@ function alipay($post,$notify_url,$return_url){
     $response = $aop->pagePay($payRequestBuilder, $arr['return_url'], $arr['notify_url']);
     var_dump($response);
 }
-
+function msg($code, $data, $msg)
+{
+    return compact('code', 'data', 'msg');
+}
 ?>

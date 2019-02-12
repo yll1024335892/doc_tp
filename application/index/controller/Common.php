@@ -1,6 +1,6 @@
 <?php
 // +----------------------------------------------------------------------
-// | 阿翼
+// | 阿翼  Date: 2019/2/12  Time: 8:30
 // +----------------------------------------------------------------------
 // | Copyright (c) 2016~2022 深圳市阿翼互联网有限公司 All rights reserved.
 // +----------------------------------------------------------------------
@@ -8,16 +8,18 @@
 // +----------------------------------------------------------------------
 // | Author: 深圳市阿翼互联网有限公司
 // +----------------------------------------------------------------------
-namespace app\index\validate;
 
-use think\Validate;
+namespace app\index\controller;
 
-class UserValidate extends Validate
+
+use think\Controller;
+
+class Common extends Controller
 {
-    protected $rule = [
-        ['userName', 'require', '用户名不能为空'],
-        ['password', 'require', '密码不能为空'],
-        ['code', 'require', '验证码不能为空']
-    ];
-
+    public function _initialize(){
+        $this->assign([
+            'username' => session("username"),
+            'id'=>''
+        ]);
+    }
 }
