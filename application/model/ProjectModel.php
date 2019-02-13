@@ -12,6 +12,7 @@ namespace app\model;
 
 use think\Cache;
 use think\Model;
+use think\Request;
 
 class ProjectModel extends Model
 {
@@ -185,9 +186,16 @@ class ProjectModel extends Model
      * @param $data
      * @param $project_id
      */
-    public function upDateTree($data,$project_id){
-        if(isset($data) && $data!=null){
-            $this->save(["doc_tree"=>$data,"doc_id"=>json_decode($data,true)[0]['doc_id']],["project_id"=>$project_id]);
+    public function upDateTree($data, $project_id)
+    {
+        if (isset($data) && $data != null) {
+            $this->save(["doc_tree" => $data, "doc_id" => json_decode($data, true)[0]['doc_id']], ["project_id" => $project_id]);
         }
+    }
+
+    public static function search($word)
+    {
+        $res = ProjectModel::where('project_name', 'like', ['%' . $word, $word . '%'], 'OR')->where("project_open_state", "eq", "1")->paginate(18, true, ['query' => request()->param()]);
+        return $res;
     }
 }

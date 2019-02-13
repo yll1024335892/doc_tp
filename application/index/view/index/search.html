@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     {include file="public/_header"/}
-    <title>{$cateName}-阿翼文档</title>
+    <title>{$word}-阿翼文档</title>
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="stylesheet" href="__CSS__/doclist.css" type="text/css"/>
@@ -15,11 +15,7 @@
             <div class="col-sm-8 col-md-8 col-lg-8 ayi-c-left">
                 <h1>
                     {volist name="cate" id="vo"}
-                    {if condition="$nowTypeId eq $vo.id"}
-                    <a href="/docs/list/{$vo.id}"> <span class="btn btn-success" title="{$vo.cate_name}">{$vo.cate_name}</span></a>
-                    {else /}
                     <a href="/docs/list/{$vo.id}"> <span class="btn btn-default" title="{$vo.cate_name}">{$vo.cate_name}</span></a>
-                    {/if}
                     {/volist}
                 </h1>
                 {volist name ="project" id="vo"}

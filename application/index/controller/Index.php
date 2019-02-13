@@ -4,6 +4,7 @@ namespace app\index\controller;
 use app\model\ProjectCategoryModel;
 use app\model\ProjectModel;
 use think\Db;
+use org\Verify;
 
 class Index extends Common
 {
@@ -37,13 +38,13 @@ class Index extends Common
         //获取所有的类别
         $cateModel = new ProjectCategoryModel();
         $cateList = $cateModel->where("parent_id", "neq", "0")->where("is_show", "eq", "1")->select();
-        $cateName=$cateModel->field("cate_name")->find($id);
+        $cateName = $cateModel->field("cate_name")->find($id);
         //获取指定类别的数据
-        $projectModel=new ProjectModel();
-        $proList=$projectModel->where("type_id","eq",(int)$id)->where("project_open_state","eq","1")->paginate(18);
-        $page=$proList->render();
-        $this->assign("page",$page);
-        return $this->fetch("", ['cate' => $cateList,'project'=>$proList,"nowTypeId"=>(int)$id,"cateName"=>$cateName['cate_name']]);
+        $projectModel = new ProjectModel();
+        $proList = $projectModel->where("type_id", "eq", (int)$id)->where("project_open_state", "eq", "1")->paginate(18);
+        $page = $proList->render();
+        $this->assign("page", $page);
+        return $this->fetch("", ['cate' => $cateList, 'project' => $proList, "nowTypeId" => (int)$id, "cateName" => $cateName['cate_name']]);
     }
 
     /**
@@ -62,18 +63,28 @@ class Index extends Common
                 $hotRes = "";
             }
             if ($res['tag'] != null && isset($res['tag'])) {
-                return $this->fetch("", ["data" => $res, "tag" => explode(";", $res['tag']), "hotRes" => $hotRes,"treeData"=>$res['doc_tree']]);
+                return $this->fetch("", ["data" => $res, "tag" => explode(";", $res['tag']), "hotRes" => $hotRes, "treeData" => $res['doc_tree']]);
             } else {
-                return $this->fetch("", ["data" => $res, "tag" => "", "hotRes" => $hotRes,"treeData"=>$res['doc_tree']]);
+                return $this->fetch("", ["data" => $res, "tag" => "", "hotRes" => $hotRes, "treeData" => $res['doc_tree']]);
             }
         } else {
-           
+
             $this->error("文档不存在");
         }
-
     }
 
-
-
+    /**
+     * 文档的搜索
+     */
+    public function search()
+    {
+        $word = input("param.p");
+        $searchRes = ProjectModel::search($word);
+        $page = $searchRes->render();
+        $this->assign(["page" => $page]);
+        $cateModel = new ProjectCategoryModel();
+        $cateList = $cateModel->where("parent_id", "neq", "0")->where("is_show", "eq", "1")->select();
+        return $this->fetch("", ["project" => $searchRes,'cate' => $cateList,"word"=>$word]);
+    }
 
 }
