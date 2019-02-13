@@ -20,7 +20,26 @@ class CollectionModel extends Model
     protected $pk = "id";//自增的id
     protected $autoWriteTimestamp = true;//自动添加时间戳
 
-    public function deleteCollection($id){
-       return $this->where("id","eq",$id)->delete();
+    public function deleteCollection($id)
+    {
+        return $this->where("id", "eq", $id)->delete();
+    }
+
+    public function addCollection($userid, $projectid)
+    {
+        $map['user_id'] = $userid;
+        $map['project_id'] = $projectid;
+        $select = $this->field("id")->where($map)->find();
+        if($select){
+            return 1;//已经有数据了
+        }else{
+            
+           $res= $this->save($map);
+            if($res){//存储数据成功
+                return 2;
+            }else{//存储数据失败
+                return 3;
+            }
+        }
     }
 }

@@ -33,5 +33,9 @@ class OrderModel extends Model
             ->where("u.is_pay","eq","1")
             ->select();
     }
+
+    public static function  getIspriceByUseridAndProjectid($userid,$projectid){
+        $isPrice=OrderModel::field("")->where()->where()->find();
+    }
     
 }

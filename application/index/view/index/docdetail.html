@@ -11,6 +11,12 @@
 {include file="public/_nav"/}
 <section class="ayi-detail-contain">
     <div class="container">
+        <div id="alert_div">
+            <!--<div class="alert  alert-dismissible"  role="alert">-->
+                <!--<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
+                <!--<p id="msg_p"></p>-->
+            <!--</div>-->
+        </div>
         <div class="row">
             <div class="col-sm-2 col-md-2 col-lg-2 thumbnail" style="background: transparent;">
                 {if condition="$data.thumbnail"}
@@ -43,13 +49,9 @@
                 </div>
                 {/if}
                 <div class="ayi-w-action">
-                    <a class="action">
+                    <a class="action" id="collection_fun">
                         <i class="glyphicon glyphicon-heart-empty"></i>
-                        <span class="text">关注</span>
-                    </a>
-                    <a class="action">
-                        <i class="glyphicon glyphicon-alert"></i>
-                        <span class="text">举报</span>
+                        <span class="text">收藏</span>
                     </a>
                     <div class="dropdown">
                         <a class="action" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -104,6 +106,28 @@
 
     </div>
 </section>
+
 {include file="public/_footer"/}
+<script type="text/javascript">
+    $(function () {
+        $userId="{$id}";
+        $projectID="{$data.project_id}";
+       $("#collection_fun").click(function () {
+           if(!$userId){
+               window.location.href="/auth/login";
+               return;
+           }
+           $.getJSON("{:url('member/addcollection')}", {'userid' : $userId,"projecid":$projectID}, function(res){
+               if(1 == res.code){
+                   $("#alert_div").html('<div class="alert alert-success alert-dismissible"  role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><p id="msg_p"></p></div>');
+                   $("#msg_p").html(res.msg);
+               }else{
+                   $("#alert_div").html('<div class="alert alert-danger alert-dismissible"  role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><p id="msg_p"></p></div>');
+                   $("#msg_p").html(res.msg);
+               }
+           });
+       });
+    });
+</script>
 </body>
 </html>

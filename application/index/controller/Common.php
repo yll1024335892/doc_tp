@@ -19,7 +19,7 @@ class Common extends Controller
     public function _initialize(){
         $this->assign([
             'username' => session("username"),
-            'id'=>''
+            'id'=>session("id")
         ]);
     }
 }
