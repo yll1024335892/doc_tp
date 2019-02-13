@@ -13,8 +13,8 @@
     <div class="container">
         <div id="alert_div">
             <!--<div class="alert  alert-dismissible"  role="alert">-->
-                <!--<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
-                <!--<p id="msg_p"></p>-->
+            <!--<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
+            <!--<p id="msg_p"></p>-->
             <!--</div>-->
         </div>
         <div class="row">
@@ -33,9 +33,9 @@
                 <div class="extra">
                     <div>
                         {if condition="$tag"}
-                           {volist name="tag" id="vo"}
-                             <span class="btn btn-default">{$vo}</span>
-                           {/volist}
+                        {volist name="tag" id="vo"}
+                        <span class="btn btn-default">{$vo}</span>
+                        {/volist}
                         {/if}
                     </div>
                 </div>
@@ -44,8 +44,12 @@
                 </div>
                 {if condition="$data.doc_id gt 0"}
                 <div class="ayi-pro">
-                    <a href="/docs/show/{$data.doc_id}" target="_blank"><button type="button" class="btn btn-success">试读</button></a>
-                    <a href="/docs/pay/{$data.project_id}" target="_blank"><button type="button" class="btn btn-danger">购买</button></a>
+                    <a href="/docs/show/{$data.doc_id}" target="_blank">
+                        <button type="button" class="btn btn-success">试读</button>
+                    </a>
+                    <a href="/docs/pay/{$data.project_id}" target="_blank">
+                        <button type="button" class="btn btn-danger">购买</button>
+                    </a>
                 </div>
                 {/if}
                 <div class="ayi-w-action">
@@ -58,11 +62,13 @@
                             <i class="glyphicon glyphicon-share"></i>
                             <span class="text">分享</span>
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                            <li><a href="#">微博</a></li>
-                            <li><a href="#">QQ</a></li>
-                            <li><a href="#">微信</a></li>
+                        <ul class="dropdown-menu bdsharebuttonbox" aria-labelledby="dropdownMenu1">
+                            <li><a class="bds_tsina" data-cmd="tsina">新浪</a></li>
+                            <li><a class="bds_sqq" data-cmd="sqq">QQ</a></li>
+                            <li><a class="bds_tqq" data-cmd="tqq">空间</a></li>
+                            <li><a class="bds_weixin" data-cmd="weixin">微信</a></li>
                         </ul>
+                        <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
                     </div>
                 </div>
             </div>
@@ -73,31 +79,37 @@
                     目录
                 </a>
                 <!--<a class="item" data-tab="catalog">-->
-                    <!--概要-->
+                <!--概要-->
                 <!--</a>-->
             </div>
             <div class="doc-tree">
-              {php}
+                {php}
                 if($treeData){
-                    echo "<ul>";
-                        $arr=json_decode($treeData,true);
-                        foreach($arr as $key=>$val){
-                            echo "<li>".str_repeat("&nbsp;&nbsp;&nbsp;&nbsp;",$val['level']).$val['doc_name']."</li>";
-                        }
-                    echo "</ul>";
+                echo "
+                <ul>";
+                    $arr=json_decode($treeData,true);
+                    foreach($arr as $key=>$val){
+                    echo "
+                    <li>".str_repeat("&nbsp;&nbsp;&nbsp;&nbsp;",$val['level']).$val['doc_name']."</li>
+                    ";
+                    }
+                    echo "
+                </ul>
+                ";
                 }
-              {/php}
+                {/php}
             </div>
         </div>
         <div class="ayi-hot">
             <h2>推荐阅读</h2>
-            <div  class="row">
+            <div class="row">
                 <div class="thumbnail" style="background: transparent;">
                     {if condition="$hotRes"}
                     {volist name="hotRes" id="vo"}
-                        <div>{if condition="$vo.thumbnail"}
-                            <img src="{$vo.thumbnail}" class="img-responsive"/>
-                            {else /}<img src="__IMG__/blank.jpg" class="img-responsive"/>{/if}<p>{$vo.project_name}</p></div>
+                    <div>{if condition="$vo.thumbnail"}
+                        <img src="{$vo.thumbnail}" class="img-responsive"/>
+                        {else /}<img src="__IMG__/blank.jpg" class="img-responsive"/>{/if}<p>{$vo.project_name}</p>
+                    </div>
                     {/volist}
                     {/if}
                 </div>
@@ -110,23 +122,23 @@
 {include file="public/_footer"/}
 <script type="text/javascript">
     $(function () {
-        $userId="{$id}";
-        $projectID="{$data.project_id}";
-       $("#collection_fun").click(function () {
-           if(!$userId){
-               window.location.href="/auth/login";
-               return;
-           }
-           $.getJSON("{:url('member/addcollection')}", {'userid' : $userId,"projecid":$projectID}, function(res){
-               if(1 == res.code){
-                   $("#alert_div").html('<div class="alert alert-success alert-dismissible"  role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><p id="msg_p"></p></div>');
-                   $("#msg_p").html(res.msg);
-               }else{
-                   $("#alert_div").html('<div class="alert alert-danger alert-dismissible"  role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><p id="msg_p"></p></div>');
-                   $("#msg_p").html(res.msg);
-               }
-           });
-       });
+        $userId = "{$id}";
+        $projectID = "{$data.project_id}";
+        $("#collection_fun").click(function () {
+            if (!$userId) {
+                window.location.href = "/auth/login";
+                return;
+            }
+            $.getJSON("{:url('member/addcollection')}", {'userid': $userId, "projecid": $projectID}, function (res) {
+                if (1 == res.code) {
+                    $("#alert_div").html('<div class="alert alert-success alert-dismissible"  role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><p id="msg_p"></p></div>');
+                    $("#msg_p").html(res.msg);
+                } else {
+                    $("#alert_div").html('<div class="alert alert-danger alert-dismissible"  role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><p id="msg_p"></p></div>');
+                    $("#msg_p").html(res.msg);
+                }
+            });
+        });
     });
 </script>
 </body>
