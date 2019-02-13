@@ -25,19 +25,26 @@ class CollectionModel extends Model
         return $this->where("id", "eq", $id)->delete();
     }
 
+    /**
+     * 添加收藏
+     * @param $userid
+     * @param $projectid
+     * @return int
+     */
     public function addCollection($userid, $projectid)
     {
         $map['user_id'] = $userid;
         $map['project_id'] = $projectid;
         $select = $this->field("id")->where($map)->find();
-        if($select){
+        if ($select) {
             return 1;//已经有数据了
-        }else{
-            
-           $res= $this->save($map);
-            if($res){//存储数据成功
+        } else {
+            $isPay = OrderModel::getIspriceByUseridAndProjectid($userid, $projectid);
+            $map['is_price'] = $isPay ? $isPay :0;
+            $res = $this->save($map);
+            if ($res) {//存储数据成功
                 return 2;
-            }else{//存储数据失败
+            } else {//存储数据失败
                 return 3;
             }
         }
