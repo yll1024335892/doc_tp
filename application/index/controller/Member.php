@@ -13,6 +13,7 @@ namespace app\index\controller;
 
 
 use app\model\CollectionModel;
+use app\model\MessageUserModel;
 use app\model\OrderModel;
 
 class Member extends Base
@@ -80,7 +81,16 @@ class Member extends Base
     public function message()
     {
         $this->assign("active", "/member/message");
-        return $this->fetch();
+        $messageUserModel=new MessageUserModel();
+
+        $res= $messageUserModel->alias("u")
+            ->field("u.*,m.title,m.contain,m.is_cancel,m.is_delete,m.msg_type")
+            ->join("message m","u.msg_id = m.id")
+            ->where("u.user_id","eq",session("id"))
+            ->paginate(18);
+        $page = $res->render();
+        $this->assign("page", $page);
+        return $this->fetch("",["list"=> count($res) >0 ? $res :""]);
     }
 
 }
