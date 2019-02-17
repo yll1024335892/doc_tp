@@ -87,4 +87,15 @@ class Index extends Common
         return $this->fetch("", ["project" => $searchRes,'cate' => $cateList,"word"=>$word]);
     }
 
+    public function alipay($id){
+        $arr=[
+            'WIDout_trade_no'=>"2019020318999920521439",
+            'WIDsubject'=>'在线支付',
+            'WIDtotal_amount'=>'0.01',
+            'WIDbody'=>'商品d的body'
+        ];
+        $slhttp = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') || (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https')) ? 'https://' : 'http://';
+        $host= $slhttp.$_SERVER['HTTP_HOST'];
+//      alipay($arr, $host.'/index/pay/notify', $host.'/index/pay/notify');
+    }
 }
