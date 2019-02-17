@@ -15,6 +15,7 @@ namespace app\index\controller;
 class Pay extends Common
 {
     public function notify(){
-        
+
     }
+    
 }
