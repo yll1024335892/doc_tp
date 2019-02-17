@@ -44,7 +44,7 @@ class Document extends Controller
             ->order('doc_sort', 'ASC')
             ->field(['doc_id', 'doc_name', 'parent_id'])
             ->select();
-        $this->detailProjectTree($docData, $id);
+        $this->detailProjectTree($docData, $id);//存储doc_tree的字段值
         $jsonArray = ProjectModel::getProjectArrayTree($id);
         if (empty($jsonArray) === false) {
             $jsonArray[0]['state']['selected'] = true;
@@ -112,14 +112,16 @@ class Document extends Controller
     private function detailProjectTree($data, $project_id)
     {
         $treeData = getDocumentTree($data, $project_id);
-        $model = new ProjectModel();
-        $str = "[";
-        foreach ($treeData as $val) {
-            $str .= $val . ",";
+        if(!empty($treeData)){
+            $model = new ProjectModel();
+            $str = "[";
+            foreach ($treeData as $val) {
+                $str .= $val . ",";
+            }
+            $str = substr($str, 0, strlen($str) - 1);
+            $str .= "]";
+            $model->upDateTree($str, $project_id);
         }
-        $str = substr($str, 0, strlen($str) - 1);
-        $str .= "]";
-        $model->upDateTree($str, $project_id);
     }
 
     /**

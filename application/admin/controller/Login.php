@@ -15,6 +15,7 @@ use app\admin\model\UserModel;
 use think\Controller;
 use org\Verify;
 
+
 class Login extends Controller
 {
     // 登录页面
@@ -29,9 +30,13 @@ class Login extends Controller
         $userName = input("param.user_name");
         $password = input("param.password");
         $code = input("param.code");
-
-        $result = $this->validate(compact('userName', 'password', "code"), 'AdminValidate');
-        if(true !== $result){
+        $rule = [
+            ['userName', 'require', '用户名不能为空'],
+            ['password', 'require', '密码不能为空'],
+            ['code', 'require', '验证码不能为空']
+        ];
+        $result = $this->validate(compact('userName', 'password', "code"), $rule);
+        if (true !== $result) {
             return json(msg(-1, '', $result));
         }
 
@@ -43,15 +48,15 @@ class Login extends Controller
         $userModel = new UserModel();
         $hasUser = $userModel->checkUser($userName);
 
-        if(empty($hasUser)){
+        if (empty($hasUser)) {
             return json(msg(-3, '', '管理员不存在'));
         }
 
-        if(md5($password . config('salt')) != $hasUser['password']){
+        if (md5($password . config('salt')) != $hasUser['password']) {
             return json(msg(-4, '', '密码错误'));
         }
 
-        if(1 != $hasUser['status']){
+        if (1 != $hasUser['status']) {
             return json(msg(-5, '', '该账号被禁用'));
         }
 
@@ -70,7 +75,7 @@ class Login extends Controller
         ];
 
         $res = $userModel->updateStatus($param, $hasUser['id']);
-        if(1 != $res['code']){
+        if (1 != $res['code']) {
             return json(msg(-6, '', $res['msg']));
         }
         // ['code' => 1, 'data' => url('index/index'), 'msg' => '登录成功']
