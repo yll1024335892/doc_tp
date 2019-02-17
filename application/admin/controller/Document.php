@@ -40,11 +40,7 @@ class Document extends Controller
 //        if(Project::hasProjectEdit($id,$this->member->member_id) === false){
 //            //返回404页面
 //        }
-        $docData = DocumentModel::where('project_id', '=', $id)
-            ->order('doc_sort', 'ASC')
-            ->field(['doc_id', 'doc_name', 'parent_id'])
-            ->select();
-        $this->detailProjectTree($docData, $id);//存储doc_tree的字段值
+        $this->docSaveTree($id);
         $jsonArray = ProjectModel::getProjectArrayTree($id);
         if (empty($jsonArray) === false) {
             $jsonArray[0]['state']['selected'] = true;
@@ -74,8 +70,8 @@ class Document extends Controller
             foreach ($selectResult as $key => $vo) {
                 $imgSrc = $vo['thumbnail'] ? $vo['thumbnail'] : "/static/admin/images/blank_img.jpg";
                 $selectResult[$key]['thumbnail'] = '<img src="' . $imgSrc . '" width="40px" height="40px" onclick="javascript:scaleImg(this)">';
-                $selectResult[$key]['cate']=$selectResult[$key]['type_id'];
-                $selectResult[$key]['is_home']=$selectResult[$key]['is_home']?"是":"否";
+                $selectResult[$key]['cate'] = $selectResult[$key]['type_id'];
+                $selectResult[$key]['is_home'] = $selectResult[$key]['is_home'] ? "是" : "否";
                 if (isset($vo['doc_tree']) && $vo['doc_tree'] != null) {
                     $selectResult[$key]['operate'] = showOperate($this->makeButton($vo['project_id'], json_decode($vo['doc_tree'], true)[0]['doc_id']), true);
                 } else {
@@ -97,22 +93,22 @@ class Document extends Controller
     {
         if (request()->isPost()) {
             $param = input('post.');
-            $param['price']=(float)$param['price'];
+            $param['price'] = (float)$param['price'];
             unset($param['file']);
             //  $param['add_time'] = date('Y-m-d H:i:s');
             $model = new ProjectModel();
             $flag = $model->addProject($param);
             return json(msg($flag['code'], $flag['data'], $flag['msg']));
         }
-        $projectCateModel=new ProjectCategoryModel();
+        $projectCateModel = new ProjectCategoryModel();
         $treeData = getProjectTree($projectCateModel->select());
-        return $this->fetch("",['treeData'=>$treeData]);
+        return $this->fetch("", ['treeData' => $treeData]);
     }
 
     private function detailProjectTree($data, $project_id)
     {
         $treeData = getDocumentTree($data, $project_id);
-        if(!empty($treeData)){
+        if (!empty($treeData)) {
             $model = new ProjectModel();
             $str = "[";
             foreach ($treeData as $val) {
@@ -132,14 +128,14 @@ class Document extends Controller
         $model = new ProjectModel();
         if (request()->isPost()) {
             $param = input('post.');
-            $param['price']=(float)$param['price'];
+            $param['price'] = (float)$param['price'];
             $flag = $model->addProject($param);
             return json(msg($flag['code'], $flag['data'], $flag['msg']));
         } else {
             $res = $model->where("project_id", 'eq', (int)input("id"))->find();
-            $projectCateModel=new ProjectCategoryModel();
+            $projectCateModel = new ProjectCategoryModel();
             $treeData = getProjectTree($projectCateModel->select());
-            return $this->fetch('', ['treeData'=>$treeData,"res"=>$res]);
+            return $this->fetch('', ['treeData' => $treeData, "res" => $res]);
         }
 
     }
@@ -289,7 +285,8 @@ class Document extends Controller
                 return $this->jsonResult(500, null, '保存失败');
             }
             $data = ['doc_id' => $document->doc_id . '', 'parent_id' => ($document->parent_id == 0 ? '#' : $document->parent_id . ''), 'name' => $document->doc_name];
-
+            //更新project表中的doc_tree
+            $this->docSaveTree($project_id);
             return $this->jsonResult(0, $data);
         }
 
@@ -333,7 +330,6 @@ class Document extends Controller
 //        if(Project::hasProjectEdit($id,$this->member_id) == false){
 //            return $this->jsonResult(40305);
 //        }
-
         $params = Request::instance()->getContent();
         if (empty($params) === false) {
             $params = json_decode($params, true);
@@ -345,6 +341,7 @@ class Document extends Controller
                 }
             }
         }
+        $this->docSaveTree($id);
         return $this->jsonResult(0);
     }
 
@@ -491,6 +488,18 @@ class Document extends Controller
         }
     }
 
+    /**
+     * 更新project表中的doc_tree的值
+     * @param $id project的id
+     */
+    private function docSaveTree($id)
+    {
+        $docData = DocumentModel::where('project_id', '=', $id)
+            ->order('doc_sort', 'ASC')
+            ->field(['doc_id', 'doc_name', 'parent_id'])
+            ->select();
+        $this->detailProjectTree($docData, $id);//存储doc_tree的字段值
+    }
 
     /**
      * 文档操作拼装操作按钮
