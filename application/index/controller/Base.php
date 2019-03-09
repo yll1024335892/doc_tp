@@ -27,7 +27,9 @@ class Base  extends Controller
         }
         $this->assign([
             'id'     => session('id'),
-            'username' => session('username')
+            'username' => session('username'),
+            'status'=>session('status'),
+            'is_active'=>session('is_active')
         ]);
     }
 }

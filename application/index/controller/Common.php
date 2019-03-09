@@ -19,7 +19,9 @@ class Common extends Controller
     public function _initialize(){
         $this->assign([
             'username' => session("username"),
-            'id'=>session("id")
+            'id'=>session("id"),
+            'status'=>session('status'),
+            'is_active'=>session('is_active')
         ]);
     }
 }

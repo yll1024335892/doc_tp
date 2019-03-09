@@ -28,6 +28,7 @@
                 <li {if condition="$active eq '/member/buy'"}class="active"{/if}><a href="/member/buy">我的购买</a></li>
             </ul>
             <ul class="nav nav-sidebar">
+                <li {if condition="$active eq '/member/member'"}class="active"{/if}><a href="/member/member">账号中心</a></li>
                 <li {if condition="$active eq '/member/reset'"}class="active"{/if}><a href="/member/reset">修改密码</a></li>
                 <li {if condition="$active eq '/member/message'"}class="active"{/if}><a href="/member/message">我的消息</a></li>
             </ul>
@@ -40,5 +41,6 @@
 </div>
 <script src="__JS__/jquery.min.js"></script>
 <script src="__JS__/bootstrap.min.js"></script>
+{block name="javascript"}{/block}
 </body>
 </html>

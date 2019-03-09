@@ -1,0 +1,24 @@
+{extend name="Public:member:_layout" /}
+{block name="title"}账号中心{/block}
+{block name="menu_name"}
+账号中心
+{/block}
+{block name="body"}
+<div class="row">
+    <span class="pull-left">{$username}</span>
+    {if condition="$is_active eq 0"}
+        <button type="button" class="btn btn-success pull-right" id="active_btn">激活</button>
+    {/if}
+</div>
+{/block}
+{block name="javascript"}
+<script style="text/javascript">
+    $(function () {
+        $("#active_btn").click(function(){
+            $.getJSON("{:url('Member/isactive')}",{"id":'{$id}'},function(data){
+                console.log(data);
+            });
+        });
+    });
+</script>
+{/block}

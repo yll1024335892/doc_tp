@@ -15,6 +15,7 @@ namespace app\index\controller;
 use app\model\CollectionModel;
 use app\model\MessageUserModel;
 use app\model\OrderModel;
+use app\model\UserUserModel;
 use think\Request;
 use org\Verify;
 
@@ -37,6 +38,37 @@ class Member extends Base
         $page = $res->render();
         $this->assign(["page" => $page]);
         return $this->fetch("", ['list' => count($res) > 0 ? $res : ""]);
+    }
+
+    /**
+     * 个人中心
+     */
+    public function member()
+    {
+        $this->assign("active", "/member/member");
+        return $this->fetch();
+    }
+
+    /**
+     * 激活用户
+     */
+    public function isactive()
+    {
+        if (Request::instance()->isAjax()) {
+            // sendEmail("邮箱激活",session('username'),)
+            $isActive = UserUserModel::field('is_active')->where("id", "eq", input('param.id'))->find();
+            echo $isActive['is_active'];
+            if(!empty($isActive)){
+               if($isActive['is_active']){
+                   $token=md5(time());
+                   session("is_active_token",$token);
+                //   $url = Request::instance()->domain() . "/index/member/isactive?id=".input('param.id')."&token=".$token;
+                   return json(msg(1, [], $isActive));
+               }
+            }
+        }
+     //   UserUserModel::save([],['id']);
+        echo "单独请求！";
     }
 
     /**
@@ -64,16 +96,16 @@ class Member extends Base
                 ['projecid', 'number', '文档id不为空']
             ];
             $result = $this->validate(compact('userid', 'projecid'), $rule);
-            if(true !== $result){
+            if (true !== $result) {
                 return json(msg(-1, '', $result));
             }
-            $collectionModel=new CollectionModel();
-            $addRes= $collectionModel->addCollection($userid,$projecid);
-            if(1==$addRes){
+            $collectionModel = new CollectionModel();
+            $addRes = $collectionModel->addCollection($userid, $projecid);
+            if (1 == $addRes) {
                 return json(msg(-1, [], "已经收藏！"));
-            }else if(2==$addRes){
+            } else if (2 == $addRes) {
                 return json(msg(1, [], "收藏成功！"));
-            }else if(3==$addRes){
+            } else if (3 == $addRes) {
                 return json(msg(-1, [], "收藏失败！"));
             }
         }

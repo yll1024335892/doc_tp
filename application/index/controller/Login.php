@@ -66,6 +66,8 @@ class Login extends Controller
         }
         session('username', $hasUser['email']);
         session('id', $hasUser['id']);
+        session('status',$hasUser['status']);
+        session('is_active',$hasUser['is_active']);
         return json(msg(1, url('/index'), '登录成功'));
     }
 
@@ -74,6 +76,8 @@ class Login extends Controller
     {
         session('username', null);
         session('id', null);
+        session('status',null);
+        session('is_active',null);
         $this->redirect(url('/index'));
     }
 

@@ -30,6 +30,7 @@ Route::get([
     'member/buy'=>"index/member/buy",//我的购买
     'member/reset'=>"index/member/reset",//修改密码
     'member/message'=>"index/member/message",//我的消息
+    'member/member'=>"index/member/member",//个人中心
 ]);
 Route::post([
     'docs/save'=> "admin/Document/save",//保存文档
