@@ -13,10 +13,10 @@ function showOperate($operate = [],$isTarget=false)
     foreach($operate as $key=>$vo){
         if(authCheck($vo['auth']) || $vo['auth']=="no"){
             if($isTarget){
-                $option .= ' <a href="' . $vo['href'] . '"  target="_blank"><button type="button" class="btn btn-' . $vo['btnStyle'] . ' btn-sm">'.
+                $option .= ' <a href=' . $vo['href'] .'  target="_blank"><button type="button" class="btn btn-' . $vo['btnStyle'] . ' btn-sm">'.
                     '<i class="' . $vo['icon'] . '"></i> ' . $key . '</button></a>';
             }else{
-                $option .= ' <a href="' . $vo['href'] . '"><button type="button" class="btn btn-' . $vo['btnStyle'] . ' btn-sm">'.
+                $option .= ' <a href=' . $vo['href'] . '><button type="button" class="btn btn-' . $vo['btnStyle'] . ' btn-sm">'.
                     '<i class="' . $vo['icon'] . '"></i> ' . $key . '</button></a>';
             }
         }
