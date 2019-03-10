@@ -38,7 +38,8 @@ Route::post([
     'docs/sort/:id'=> ['admin/Document/sort',[],['id'=>'\d+']],//文档的排序
     'docs/history/delete'=>'admin/Document/deleteHistory',//删除文档记录
     'docs/history/restore'=>'admin/Document/restoreHistory',//回复文档记录
-    'docs/upload'=>'admin/Document/upload'
+    'docs/upload'=>'admin/Document/upload',
+    'docs/setpay'=>'admin/Document/setpay',//设置文档的收费的地方
 ]);
 Route::rule('docs/history/:id','admin/Document/history','GET|POST');
 return [

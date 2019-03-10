@@ -53,12 +53,12 @@ class Document  extends Common
 
         $this->data['tree'] = ProjectModel::getProjectHtmlTree($doc->project_id,$doc->doc_id);
         $this->data['title'] = $doc->doc_name;
-
         if(empty($doc->doc_content) === false){
-            $this->data['body'] = DocumentModel::getDocumnetHtmlFromCache($doc_id);
+             $this->data['body'] = DocumentModel::getDocumnetHtmlFromCache($doc_id);
         }else{
             $this->data['body'] = '';
         }
+
         if(Request::instance()->isAjax()){
            // unset($this->data['member']);
             unset($this->data['project']);

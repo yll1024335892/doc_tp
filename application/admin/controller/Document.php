@@ -73,9 +73,9 @@ class Document extends Controller
                 $selectResult[$key]['cate'] = $selectResult[$key]['type_id'];
                 $selectResult[$key]['is_home'] = $selectResult[$key]['is_home'] ? "是" : "否";
                 if (isset($vo['doc_tree']) && $vo['doc_tree'] != null) {
-                    $selectResult[$key]['operate'] = showOperate($this->makeButton($vo['project_id'], json_decode($vo['doc_tree'], true)[0]['doc_id']), true);
+                    $selectResult[$key]['operate'] = showOperate($this->makeButton($vo['project_id'], json_decode($vo['doc_tree'], true)[0]['doc_id'],$vo['doc_tree']), true);
                 } else {
-                    $selectResult[$key]['operate'] = showOperate($this->makeButton($vo['project_id'], ""), true);
+                    $selectResult[$key]['operate'] = showOperate($this->makeButton($vo['project_id'], "",""), true);
                 }
             }
             $return['total'] = $Model->getAllProjects($where);  // 总数据
@@ -345,6 +345,28 @@ class Document extends Controller
         return $this->jsonResult(0);
     }
 
+    public function setpay(){//设置文档的收费的地方
+        $id=input('param.id');
+       if(empty($id)){
+           return $this->jsonResult(-1,null,"文档的id不存在!");
+       }
+        $checkVal=input('param.checkID/a');
+        if (!is_array($checkVal)){
+            return $this->jsonResult(-1,null,"数据不合法");
+        }
+
+        $list=[];
+        foreach ($checkVal as $val){
+            $tempArr=['doc_id'=>$val,'is_price'=>1,'project_id'=>$id];
+            array_push($list,$tempArr);
+        }
+        $model=new DocumentModel();
+        $model->save(['is_price'=>0],['project_id'=>$id]);
+        $model->saveAll($list);
+        $this->docSaveTree($id);
+        return $this->jsonResult(0);
+    }
+
     /**
      * 查看历史记录
      */
@@ -496,7 +518,7 @@ class Document extends Controller
     {
         $docData = DocumentModel::where('project_id', '=', $id)
             ->order('doc_sort', 'ASC')
-            ->field(['doc_id', 'doc_name', 'parent_id'])
+            ->field(['doc_id', 'doc_name', 'parent_id','is_price'])
             ->select();
         $this->detailProjectTree($docData, $id);//存储doc_tree的字段值
     }
@@ -506,7 +528,7 @@ class Document extends Controller
      * @param $id
      * @return array
      */
-    private function makeButton($id, $showid)
+    private function makeButton($id, $showid,$obj)
     {
         return [
             '编辑' => [
@@ -524,6 +546,12 @@ class Document extends Controller
             '查看' => [
                 'auth' => 'no',
                 'href' => $showid ? "/docs/show/" . $showid : "javascript:",
+                'btnStyle' => $showid ? "primary" : "primary disabled",
+                'icon' => 'fa fa-eye'
+            ],
+            '设置收费章节' => [
+                'auth' => 'no',
+                'href' => $showid ? "javascript:setPay(JSON.stringify($obj),$id);" : "javascript:",
                 'btnStyle' => $showid ? "primary" : "primary disabled",
                 'icon' => 'fa fa-eye'
             ],

@@ -154,8 +154,53 @@
             area: ['500px', '500px'], //宽高
             content: '<img src='+$srcStr+' style="width: 100%" />'
         });
+    }
+    
+    function setPay(obj,id) {
+        $res=JSON.parse(obj);
+        $hh=`<form class="form-horizontal" onsubmit="javascript:return false;" style="padding: 10px" id="payForm">`;
+       if($res.length>0){
+          for(var i=0; i<$res.length;i++){
+              $blank=('&nbsp;&nbsp;&nbsp;&nbsp;').repeat($res[i]['level']);
+              if($res[i]['is_price']==1){
+                  $hh+='<div class="checkbox"><label>'+$blank+'<input type="checkbox" checked value='+$res[i]["doc_id"]+' name="setpay" style="margin-top: 4px">'+$res[i]["doc_name"]+'</label></div>';
+              }else{
+                  $hh+='<div class="checkbox"><label>'+$blank+'<input type="checkbox" value='+$res[i]["doc_id"]+' name="setpay" style="margin-top: 4px">'+$res[i]["doc_name"]+'</label></div>';
+              }
+          }
+           $hh+='<button type="button" class="btn btn-primary btn-sm" onclick="submitSetBtn('+id+')">确定</button>';
+       }
+         $hh+=`</form>`;
+       layer.open({
+            type: 1,
+            skin: 'layui-layer-rim', //加上边框
+            area: ['500px', '400px'], //宽高
+            content: $hh
+        });
+    }
+    function submitSetBtn(id) {
+        if($("#payForm").length>0){
+            var checkID = [];//定义一个空数组
+            $("input[name='setpay']:checked").each(function (index) {
+                checkID[index] =$(this).val();
+            })
+            $.post('/docs/setpay',{checkID:checkID,id:id},function(res){
+                console.log(res);
+                layer.close(layer.index);
+                if (res.errcode != 0) {
+                    layer.msg(res.message);
+                } else {
+                    layer.msg("设置收费章节成功");
+                    window.setTimeout(function () {
+                        window.location.reload();
+                    },1000)
+
+                }
+           },'json')
+        }
 
     }
+
 </script>
 </body>
 </html>
