@@ -6,7 +6,7 @@
     <meta name="renderer" content="webkit" />
     <link rel="shortcut icon" href="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="author" content="SmartWiki" />
+    <meta name="author" content="阿翼" />
     <title>{$title} </title>
     <!-- Bootstrap -->
     <link href="__DOC__/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -60,8 +60,7 @@
             </div>
             <div class="m-copyright">
                 <p>
-                    本文档使用
-                    <a href="https://www.iminho.me" target="_blank">SmartWiki</a> 发布
+                    本文档由阿翼发布，广告合作:QQ-2514539827
                 </p>
             </div>
         </div>
@@ -106,7 +105,7 @@
                 <div class="form-group">
                     <label for="password" class="col-sm-2 control-label">项目地址</label>
                     <div class="col-sm-10">
-                        <input type="text" value="{{route('home.show',['id' => $project->project_id])}}" class="form-control" onmouseover="this.select()" id="projectUrl" title="项目地址">
+                        <input type="text" value="{route('home.show',['id' => $project->project_id])}" class="form-control" onmouseover="this.select()" id="projectUrl" title="项目地址">
                     </div>
                     <div class="clearfix"></div>
                 </div>

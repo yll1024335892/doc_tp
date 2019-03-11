@@ -54,7 +54,18 @@ class Document  extends Common
         $this->data['tree'] = ProjectModel::getProjectHtmlTree($doc->project_id,$doc->doc_id);
         $this->data['title'] = $doc->doc_name;
         if(empty($doc->doc_content) === false){
-             $this->data['body'] = DocumentModel::getDocumnetHtmlFromCache($doc_id);
+            if($doc->is_price==1){
+                $str='<div class="jumbotron">';
+                $str.='<p style="text-align:center">立即购买，享受随时随地阅读的乐趣</p>';
+                $str.='<div style="text-align:center"><div class="btn-group" role="group">';
+                $str.='<button type="button" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-yen" aria-hidden="true">¥</span>'.$project->price.'</button>';
+                $str.='<button type="button" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>购买</button>';
+                $str.='</div></div>';
+                $str.='</div>';
+                $this->data['body'] = $str;
+            }else{
+                $this->data['body'] = DocumentModel::getDocumnetHtmlFromCache($doc_id);
+            }
         }else{
             $this->data['body'] = '';
         }
