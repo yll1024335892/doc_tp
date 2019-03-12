@@ -120,6 +120,7 @@ class Login extends Controller
             $insertRes = $userModel->save(['email' => $userName, 'password' => md5($password . config('salt'))]);
             if ($insertRes) {
                 //  return json(msg(1, '', '注册成功,到邮箱中激活'));
+                session(null);
                 session('username', $userName);
                 session('id', $insertRes);
                 return json(msg(1, url('/index'), '登录成功'));

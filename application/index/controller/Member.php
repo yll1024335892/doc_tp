@@ -46,7 +46,9 @@ class Member extends Base
     public function member()
     {
         $this->assign("active", "/member/member");
-        return $this->fetch();
+        $model=new UserUserModel();
+        $res= $model->where("id","eq",session('id'))->field("is_active")->find();
+        return $this->fetch("",["is_active"=>$res['is_active']]);
     }
 
     /**
@@ -120,6 +122,7 @@ class Member extends Base
         $this->assign("active", "/member/buy");
         $orderModel = new OrderModel();
         $userId = session("id");
+        echo $userId;
         $res = $orderModel->alias('u')
             ->field('u.id,u.project_id,p.project_name,p.description,p.thumbnail')
             ->join('project p', 'u.project_id = p.project_id')
