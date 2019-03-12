@@ -47,7 +47,6 @@
             <div class="manual-tab">
                 <div class="tab-navg">
                     <span data-mode="view" class="navg-item active"><i class="fa fa-align-justify"></i><b class="text">目录</b></span>
-                   <span data-mode="search" class="navg-item"><i class="icon icon-search"></i><b class="text">搜索</b></span>
                 </div>
                 <div class="tab-wrap">
                     <div class="tab-item manual-catalog">
@@ -105,7 +104,7 @@
                 <div class="form-group">
                     <label for="password" class="col-sm-2 control-label">项目地址</label>
                     <div class="col-sm-10">
-                        <input type="text" value="{route('home.show',['id' => $project->project_id])}" class="form-control" onmouseover="this.select()" id="projectUrl" title="项目地址">
+                        <input type="text" value="{$host}/docs/show/{$doc_first_id}" class="form-control" onmouseover="this.select()" id="projectUrl" title="项目地址">
                     </div>
                     <div class="clearfix"></div>
                 </div>

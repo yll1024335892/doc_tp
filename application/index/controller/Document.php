@@ -75,11 +75,9 @@ class Document  extends Common
             unset($this->data['project']);
             unset($this->data['tree']);
             $this->data['doc_title'] = $doc->doc_name;
-
-
             return jsonResult(0,$this->data);
         }
-
+        $this->assign(["host"=>request()->domain(),"doc_first_id"=>$doc_id]);
         return $this->fetch("",$this->data);
     }
 }
